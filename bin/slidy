@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+
+# For now, just hit run and your presentation will be built in build/.
+# Real CLI will come later.
+
+require 'fileutils'
+require 'maruku'
+
+root_dir = File.dirname(__FILE__)+"/.."
+build_dir = File.join(root_dir, "build")
+input_dir = File.join(root_dir, "slides")
+output_filename = File.join(build_dir, "presentation.html")
+
+source = File.read(File.join(input_dir, "presentation.md"))
+slides = source.split(/<!--\s?(slide.*?)-->/m)
+slides.shift # remove first element, always empty
+presentation = []
+while !slides.empty?
+  options = slides.shift.split(/\s+/)
+  content = slides.shift
+  presentation << "<div class=\"#{options.join(" ")}\">"+Maruku.new(content).to_html.gsub(/<code>(.*?)<\/code>/m, '\1')+"</div>"
+end
+
+header = <<-HEADER
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-US">
+  <head>
+    <meta name="generator" content="HTML Tidy for Linux/x86 (vers 1st November 2003), see www.w3.org" />
+    <title>HTML Slidy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="copyright" content="Copyright &#169; 2010 INRIA - Rennes Bretagne Atlantique" />
+    <meta name="font-size-adjustment" content="-2" />
+    <link rel="stylesheet" href="assets/stylesheets/slidy.css" type="text/css" media="screen, projection, print" />
+    <link rel="stylesheet" href="assets/stylesheets/custom.css" type="text/css" media="screen, projection, print" />
+    <link rel="stylesheet" href="assets/stylesheets/shCore.css" type="text/css" media="screen, projection, print" />
+    <link rel="stylesheet" href="assets/stylesheets/shThemeDefault.css" type="text/css" media="screen, projection, print" />
+    <script src="assets/javascripts/slidy.js" charset="utf-8" type="text/javascript">
+    </script>
+    <script type="text/javascript" src="assets/javascripts/shCore.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushRuby.js"></script>
+    <script type="text/javascript">
+      SyntaxHighlighter.defaults['toolbar'] = true // required for collapsed elements
+      // SyntaxHighlighter.config.clipboardSwf = 'assets/javascripts/clipboard.swf';
+      SyntaxHighlighter.all();
+    </script>
+  </head>
+  <body>
+    <div class="background"><img alt="" id="head-icon" src="assets/images/icon-blue.png" /></div>
+    
+HEADER
+
+footer = <<-FOOTER
+  </body>
+</html>
+FOOTER
+
+FileUtils.rm_rf(build_dir)
+FileUtils.mkdir_p(build_dir)
+
+# Output presentation
+File.open(output_filename, "w+") do |f|
+  f << header
+  f << presentation.join("\n")
+  f << footer
+end
+
+# Copy Slidy assets
+FileUtils.cp_r(File.join(root_dir, "assets"), File.join(build_dir, "assets"))
+
+# Copy user assets
+Dir[input_dir+'/*'].each do |file|
+  if File.directory?(file)
+    FileUtils.cp_r(file, build_dir)
+  end
+end
+
+# Open presentation in default browser
+system "open #{output_filename}"
