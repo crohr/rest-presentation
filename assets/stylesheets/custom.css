@@ -27,6 +27,18 @@ div.handout {
   margin-right: 20px;
 }
 
+table th {
+  background: #70a8c4;
+}
+table td.highlighted {
+  background: #66cc33;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+table td {
+  background: #eee;
+  padding: 5px;
+}
 div.slide.titlepage {
   text-align: center;
 }

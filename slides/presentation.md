@@ -12,48 +12,63 @@ Needs to set and use more of the meta-declarations such as {:ruby}, {:incrementa
 Styles, Technologies and Applications 
 {:class="subhead"}
 
-Cyril Rohr (IRISA - Equipe Myriads)
+Cyril Rohr (IRISA - Equipe Myriads)  
 Feb 4, 2010
 
 <!-- slide title -->
 # Agenda
-* Problem
+* What problem are we trying to solve ?
 * **Web** Services ?
-* Styles: RPC vs Service-oriented vs Resource-Oriented
-* REST : Representation State Transfer...
-* Technologies
-* Real-World example: Grid5000
+* Architectural Styles - RPC vs Service-Oriented vs Resource-Oriented
+* REST (Representation State Transfer): the style of the Web
+* Technologies for building RESTful Web Services
+* Real-World example: Grid5000 APIs
 {:class="incremental"}
-
-<!-- 
-  Concepts (intro, avantages, contraintes)
-* Mise en oeuvre (client side, server side, tools)
-* Aspects non fonctionnels 
--->
 
 <!-- slide title center -->
 # Problem
 Complete, closed, monolithic applications
 {:class="subhead"}
-<img src="images/monolithic-applications.png" height="250" width="604" />
+<img src="images/monolithic-applications.png" />
+
+<!-- slide title center -->
+# Objectives
+Integration across application boundaries
+{:class="subhead"}
+<img src="images/integration-accross-applications.png" />
 
 <!-- slide center -->
-# Goal
-Program integration across application => img
+# Objectives
+Integration across organizational boundaries
 {:class="subhead"}
-Program integration across organizational boundaries => img
-{:class="subhead"}
+<img src="images/integration-accross-organizations.png" />
 
-<!-- slide title -->
+<!-- slide center title -->
 # Evolution towards Distributed Applications
-* monolithic (img) => duplication, high maintenance cost, no data sharing
-* data export (img) => fragile, duplication
-* operations over the network (img) => complex, vendor lock in, tight coupling, often language dependent
-* service oriented architectures, composition, orchestration (img) => language independant, reusability, composability, loose-coupling
+* **Monolithic Applications**: duplication, high maintenance cost, no data sharing  
+  <img src="images/monolithic-applications.png" style="margin: 5px"  />
+
+<!-- slide center title -->
+# Evolution towards Distributed Applications
+* **Applications sharing data**: fragile, duplication   
+  <img src="images/applications-sharing-data.png" style="margin: 5px" />
+
+<!-- slide center title -->
+# Evolution towards Distributed Applications
+* **Applications sharing objects over the network**: complex, vendor lock in, tight coupling, often language dependent  
+  <div class="incremental" style="clear: both">
+    <img src="images/applications-bus.png" style="float:left" />
+    <img src="images/applications-bus-enlarged.png" style="float:left" />
+  </div>
+
+<!-- slide center title -->
+# Evolution towards Distributed Applications
+* **Service Oriented Architectures**: language independant, reusability, composability, loose-coupling  
+  <img src="images/soa.png" style="margin: 5px"  />
 
 <!-- slide title -->
 # Software Services - definition
-* Software services exist at a service endpoint (**address**) that can be **remotely** accessed by clients. 
+* Software services are units of functionality that exist at a service endpoint (**address**) that can be **remotely** accessed by clients. 
 * Clients can use the service by communicating with this endpoint without having direct access to the actual code files that implement the service.
 * Loosely coupled
 * Avoid fine-grained interactions patterns.
@@ -67,102 +82,275 @@ Program integration across organizational boundaries => img
 * Standardization, leading to better interoperability
 {:class="incremental"}
 
-<!-- slide title -->
+<!-- slide title incremental -->
 # **Web** Services ?
+Term is often a catch-all for "services accessible on the web"
+  <im src="images/web-services-cloud.png" />
+
 W3C
 > a "web service" is "a software system designed to support interoperable machine-to-machine interaction over a network. 
 > It has an interface described in a machine-processable format (specifically Web Services Description Language WSDL). 
 > Other systems interact with the web service in a manner prescribed by its description using SOAP messages, typically conveyed using HTTP with an XML serialization in conjunction with other web-related standards."
 
-<img src="images/web-services.png" style="float: right" />
-Web Services is a specific set of technologies for exposing Software Services:
-* the WSDL language for service description
-* the SOAP language as the message format
-* the HTTP protocol as the transport layer.
-* the UDDI interface for service discovery.
-{:class="incremental"}
+Web Services are just one of the technologies available to create distributed architectures. A software service may, but need not be exposed as a Web Service.
+
 
 <!-- slide -->
-# **Web** Services ? - sidenote A virer
+# **Web** Services ?
+* Only one of the many technologies available to create distributed architectures.
+  <table cellspacing="0">
+    <tr><th>Style</th><th>Technologies</th></tr>
+    <tr><td class="highlighted">Service Oritented Architecture</td><td class="highlighted">WS-*</td></tr>
+    <tr><td>Resource Oritented Architecture</td><td>HTTP</td></tr>
+    <tr><td>RPC</td><td>CORBA, DCOM, RMI, ...</td></tr>
+  </table>
 * A software service may, but need not be exposed as a Web Service.
-* A system created by composing web services may not necessarily be regarded as having a Service Oriented Architecture unless its services conform to SOA design principles.
-* Many current solutions created using web service solutions are not Service Oriented.
 {:class="incremental"}
 
 <!-- slide title -->
-# Styles
+# Architectural Styles for Distributed Applications
 * RPC (Remote Procedure Call)
-* Service/Message oriented
-* Resource oriented
+* Service/Message Oriented
+* Resource Oriented
+{:class="incremental"}
+
+<!-- slide title incremental -->
+# RPC
+* CORBA, DCOM, RMI, XML-RPC...
+  <img src="images/corba.png" style="float: right"/>
+* Language independency
+* Apparent simplicity
 {:class="incremental"}
 
 <!-- slide incremental -->
-# RPC (schema stub)
-* CORBA, RMI, XML-RPC...
-* Tight coupling (stubs, proxy)
-* Poor interoperability
-* No standard
-* Poor scalability, in part due to processing required to serialize/deserialize from/to objects
+# RPC - drawbacks
+* Tight coupling (genrated client stub and server skeleton)
+  <img src="images/corba.png" style="float: right"/>
+* No unique standard, leading to poor interoperability
+* Poor scalability due to serialization/deserialization, statefulness, but also
 * Hides the fact that objects are distributed, thus developer cannot make decisions according to objects locality.
 {:class="incremental"}
 
-DEAD END
-{:class="big failure center"}
+<!-- slide title incremental -->
+# Message Oriented Architecture
+* Most often implemented using the WS-\* stack
+  <img src="images/web-services.png" style="float: right;" />
+* Web Services is a specific set of technologies for exposing Software Services:
+  * the WSDL language for service description
+  * the SOAP language as the message format
+  * the HTTP protocol as the transport layer
+  * the UDDI interface for service discovery
+  {:class="incremental"}
+{:class="incremental"}
 
 <!-- slide incremental -->
-# Message oriented - I
-* ajout de parametres ne casse pas les anciens clients
-* Most often implemented using the WS-\* stack
-* exemple de message SOAP
-slide suivante:
+# Message Oriented Architecture - WS-\*
+Java method:
+
+    public void myMethod(int x, float y);
+  {:class="brush: java"}
+
+## WSDL
+    <message name="myMethodRequest">
+        <part name="x" type="xsd:int"/>
+        <part name="y" type="xsd:float"/>
+    </message>
+    <message name="empty"/>
+    
+    <portType name="PT">
+        <operation name="myMethod">
+            <input message="myMethodRequest"/>
+            <output message="empty"/>
+        </operation>
+    </portType>
+    
+    <binding .../>  
+  {:class="brush: xml; highlight: [8];"}
+
+## SOAP
+    <?xml version="1.0"?>
+    <soap:Envelope xmlns:soap="http://www.w3.org/2001/12/soap-envelope" soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+  
+      <soap:Header>
+      ...
+      </soap:Header>
+  
+      <soap:Body>
+        <myMethod>
+            <x xsi:type="xsd:int">5</x>
+            <y xsi:type="xsd:float">5.0</y>
+        </myMethod>
+      </soap:Body>
+  
+    </soap:Envelope>
+  {:class="brush: xml;"}
+
+    HTTP/1.1 200 OK
+    Content-Type: application/soap+xml; charset=utf-8
+    Content-Length: 234
+  
+    <?xml version="1.0"?>
+    <soap:Envelope
+    xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+    soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+  
+    <soap:Body>
+      <m:GetPriceResponse xmlns:m="http://www.w3schools.com/prices">
+        <m:Price>1.90</m:Price>
+      </m:GetPriceResponse>
+    </soap:Body>
+
+    </soap:Envelope>
+  {:class="brush: xml;"}
+
+<!-- slide incremental -->
+# Message Oriented Architecture - benefits
+* Kind of standardized, leading to better interoperability
+* Easier to change the interface without breaking old clients
+{:class="incremental"}
+
+<!-- slide incremental -->
+# Message Oriented Architecture - drawbacks
 * Complex, ever-changing specification
   <img src="images/ws-stack.png" style="float: right" />
-  WS-Security, WS-Policy, WS-SecurityPolicy, WS-PolicyAssertions, WS-PolicyAttachment, WS-Trust, WS-Privacy, WS-Routing, WS-Referral, WS-Coordination, WS-Transaction,    WS-SecureConversation, WS-Federation, WS-Authorization, WS-Attachments, WS-Transfer, WS-ResourceTransfer, WS-ReliableMessaging, WS-Addressing, ...
+  WS-Security, WS-Policy, WS-SecurityPolicy, WS-PolicyAssertions, WS-PolicyAttachment, WS-Trust, WS-Privacy, WS-Routing, WS-Referral, WS-Coordination, WS-Transaction, WS-SecureConversation, WS-Federation, WS-Authorization, WS-Attachments, WS-Transfer, WS-ResourceTransfer, WS-ReliableMessaging, WS-Addressing, ...
+  {:class="small"}
+* Specification written and pushed by big vendors (IBM, Microsoft, HP, Intel, SAP, Sun, etc.)
+* Poor interoperability between vendor implementations, leading to vendor lock-in  
 {:class="incremental"}
 
 <!-- slide incremental -->
-# Message oriented - II
-* Poor interoperability between vendor implementations -> vendor lock-in
-* revient a faire du RPC, tight-coupling
-* Spec written and pushed by big vendors (IBM, Microsoft, HP, Intel, SAP, Sun, etc.)
-* Does not use HTTP as an application protocol, only as a transport protocol (reinvents the wheel).
+# Message Oriented Architecture - drawbacks
+* Most often, developers use early binding -> stubs, proxies... tight-coupling
+  <img src="images/soap.png" style="float: right" />
+* Poor scalability: interactions are stateful, requires processing power to decode SOAP messages, difficult to load-balance or route requests based on the service endpoint (URI)
+* UDDI is a failure
+* Does not use HTTP as an application protocol, only as a transport protocol.
 {:class="incremental"}
 
-You may need the advanced Security/QoS specs, but will only work in a restricted environment.
-In fact, most of it can be achieved with standard web technologies (SSL/TLS, PKI, Load balancer, Proxies, etc.)
+However, some advanced specs may be of interest (Security, QoS) if your environment requires it.
 
-ENTERPRISE COMPLIANT
-{:class="big failure center"}
-
-VENDOR CASH COW
-{:class="big failure center"}
-
-<!-- slide incremental -->
-# **REST** Services - I
+<!-- slide title incremental -->
+# **RESTful** Services - concepts
 * Representation State Transfer [Architectural Styles and the Design of Network-based Software Architectures](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) Roy T. Fielding (2000) 
-  > The REST Web is the subset of the WWW (based on **HTTP**) in which agents provide uniform **interface semantics** -- essentially create, retrieve, update and delete -- rather than arbitrary or application-specific interfaces, and manipulate **resources** only by the exchange of **representations**. 
+  > The REST Web is the subset of the WWW (based on **HTTP**) in which agents provide uniform **interface semantics** -- essentially create (POST), retrieve (GET), update (PUT) and delete (DELETE) -- rather than **arbitrary or application-specific** interfaces, and manipulate **resources** only by the exchange of **representations**. 
   > Furthermore, the REST interactions are "**stateless**" in the sense that the meaning of a message does not depend on the state of the conversation.
+  <img src="http-client-server" />
 {:class="incremental"}
+
 
 image crohr, page html crohr, crohr.vcs, preparer exemples
 
 <!-- slide incremental -->
-# **REST** Services - II
-* Removes unnecessary complexity: body, envelope, methods, all already exists in HTTP
+# **RESTful** Services - concepts
 
-PROVEN, SIMPLE, UBIQUITOUS
-{:class="big success center"}
+## Resources
+* Functionalities offered by the service are exposed under the form of resources (e.g. jobs, users, payments, orders, friends...)
+  > A resource can be anything that has identity (RFC 2396)
+* Real objects (user, site) or abstract concepts (status, payment)
+* A resource may have **multiple representations**. E.g. a calendar may be represented using
 
-<!-- slide -->
-# REST - HTTP
-* document-based protocol
-* client puts a document in an envelope and sends it to the server
-* server returns a response document
+        image/png, text/html, application/pdf, application/xml, text/calendar
+{:class="incremental"}
 
-* a set of predefined verbs
-* headers
-* body
+## URI
+* Uniquely identifies each resource using a satndardized syntax (http://server.com/users/crohr, http://bank.com/accounts). 
+* Allows the use of **hypermedia** links to navigate from service to service.
+{:class="incremental"}
 
+<!-- slide incremental -->
+# **RESTful** Services - concepts
+
+## Unified interface
+All resources share the same interface for transfering state between the client and the resource:
+
+* a restricted set of well-defined operations (HTTP *verbs*)
+
+        GET, POST, PUT, DELETE, etc.
+* a restricted set of [media types](http://www.iana.org/assignments/media-types/)
+
+        text/html, image/png, application/xml, etc.
+* a restricted set of [status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
+
+        200 (OK), 201 (Created), 202 (Accepted), 304 (Not Modified), 400 (Bad Request), 404 (Not Found), 500 (Internal Server Error), ...
+{:class="incremental"}
+
+<!-- slide incremental -->
+# **RESTful** Services - concepts
+
+## HTTP
+* Client-Server protocol
+  <img src="images/http-client-server" style="float:right" />
+* Stateless (each operation is self-sufficient)
+* Cacheable
+* Layered (intermediaries can be inserted between client and server, such as proxy, firewall, load-balancer, etc.)
+  <img src="images/http-intermediaries" />
+{:class="incremental"}
+
+<!-- slide incremental -->
+# **RESTful** Services - benefits
+* **Scalability** (statelessness, thus requests are not bound to a specific server)
+* **Interoperability**: the only thing that changes is the name of resources. Available HTTP verbs, status codes, etc. are always identical from one service to another.
+* **Addressability**: each resource is uniquely identified
+
+        https://api.grid5000.fr/sid/grid5000/sites/rennes
+* Easier to **version**: can insert a version number in the URI, and dispatch accordingly to the correct server.
+* **Control** meta-data (HTTP headers)
+        
+        Accept: application/json [format]
+        Cache-Control: max-age=120 [cache]
+        Accept-Encoding: gzip, deflate [compression]
+        Accept-Language: us,en;q=0.5 [language]
+        Accept-Charset: ISO-8859-15,utf-8;q=0.7,*;q=0.7 [charset]
+        ...
+* Removes unnecessary complexity: headers, methods, status codes, media types are already standardized
+{:class="incremental"}
+
+<!-- slide incremental -->
+# **RESTful** Services - benefits
+* **Ubiquity**: every programming language can speak HTTP
+* **Layered** architecture
+  <div class="incremental">
+    <img src="images/infrastructure-2.png" width="250" height="450" style="float:left" />
+    <img src="images/infrastructure-3.png" width="250" height="450" style="float:left" />
+    <img src="images/infrastructure-4.png" width="250" height="450" style="float:left" />
+    <img src="images/infrastructure-5.png" width="250" height="450" style="float:left" />
+  </div>
+{:class="incremental"}
+
+<!-- slide incremental -->
+# **RESTful** Services - constraints
+* Requires to **carefully choose** the HTTP verb among those available
+
+        GET     safe        (doesn't change the state of the resource on the server), 
+                idempotent  (same operation can be applied multiple times and will always return the same result), 
+                cacheable 
+        PUT     idempotent 
+        DELETE  idempotent 
+        POST 
+        ...
+
+* **Stateless**: each communication must include all the material required for the server to understand the context.
+* Do NOT disguise RPC calls as HTTP requests
+      
+        GET /service?action=getUser&id=crohr&...
+        
+        POST /service
+        {
+          "action": "getUser",
+          "id": "crohr",
+          ...
+        }
+{:class="incremental"}
+
+<!-- slide incremental -->
+# **RESTful** Services in Grid5000
+* Querying the Grid5000 API to get the description of the platform
+  <img src="images/grid5000.png" style="float:left" width="50%" height="50%" />
+* Submitting a new job
+
+
+<!--
 An HTTP GET request for http://www.oreilly.com/index.html 
 
     GET /index.html HTTP/1.1 
@@ -176,69 +364,24 @@ An HTTP GET request for http://www.oreilly.com/index.html
     Connection: keep-alive 
   {:class="brush: plain"}
 
-* The HTTP method
-* The path (the address on the envelope): `/index.html`
-This is the portion of the URI to the right of the hostname: here, http:// 
-www.oreilly.com/index.html becomes “/index.html.” In terms of the envelope met- 
-aphor, the path is the address on the envelope. In this book I sometimes refer to 
-the “URI” as shorthand for just the path. 
-The request headers 
-These are bits of metadata: key-value pairs that act like informational stickers 
-slapped onto the envelope. This request has eight headers: Host, User-Agent, 
-Accept, and so on. There’s a standard list of HTTP headers (see Appendix C), and 
-applications can define their own. 
-The entity-body, also called the document or representation 
-This is the document that inside the envelope. This particular request has no entity- 
-body, which means the envelope is empty! This is typical for a GET request, where 
-all the information needed to complete the request is in the path and the headers. 
-The HTTP response is also a document in a envelope. It’s almost identical in form to 
-the HTTP request. Example 1-6 shows a trimmed version of what the server at 
-oreilly.com sends my web browser when I make the request in Example 1-5. 
-Example 1-6. The response to an HTTP GET request for http://www.oreilly.com/index.html 
-HTTP/1.1 200 OK 
-Date: Fri, 17 Nov 2006 15:36:32 GMT 
-6 | Chapter 1:!The Programmable Web and Its Inhabitants
-Server: Apache 
-Last-Modified: Fri, 17 Nov 2006 09:05:32 GMT 
-Etag: "7359b7-a7fa-455d8264 
-Accept-Ranges: bytes 
-Content-Length: 43302 
-Content-Type: text/html 
-X-Cache: MISS from www.oreilly.com 
-Keep-Alive: timeout=15, max=1000 
-Connection: Keep-Alive 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
-<head> 
-... 
-<title>oreilly.com -- Welcome to O'Reilly Media, Inc.</title> 
-... 
-The response can be divided into three parts: 
-The HTTP response code 
-This numeric code tells the client whether its request went well or poorly, and how 
-the client should regard this envelope and its contents. In this case the GET oper- 
-ation must have succeeded, since the response code is 200 (“OK”). I describe the 
-HTTP response codes in Appendix B. 
-The response headers 
-Just as with the request headers, these are informational stickers slapped onto the 
-envelope. This response has 11 headers: Date, Server, and so on. 
-The entity-body or representation 
-Again, this is the document inside the envelope, and this time there actually is one! 
-The entity-body is the fulfillment of my GET request. The rest of the response is 
-just an envelope with stickers on it, telling the web browser how to deal with the 
-document. 
-The most important of these stickers is worth mentioning separately. The response 
-header Content-Type gives the media type of the entity-body. In this case, the media 
-type is text/html. This lets my web browser know it can render the entity-body as 
-an HTML document: a web page. 
-There’s a standard list of media types (http://www.iana.org/assignments/media- 
-types/). The most common media types designate textual documents (text/html), 
-structured data documents (application/xml), and images (image/jpeg). In other 
-discussions of REST or HTTP, you may see the media type called the “MIME type,” 
-“content type,” or “data type.” 
-
-
+    HTTP/1.1 200 OK 
+    Date: Fri, 17 Nov 2006 15:36:32 GMT 
+    Server: Apache 
+    Last-Modified: Fri, 17 Nov 2006 09:05:32 GMT 
+    Etag: "7359b7-a7fa-455d8264 
+    Accept-Ranges: bytes 
+    Content-Length: 43302 
+    Content-Type: text/html 
+    
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+    <head> 
+    ... 
+    <title>oreilly.com Welcome to O'Reilly Media, Inc.</title> 
+    ... 
+  {:class="brush: plain"}
+-->
 
 <!-- slide title -->
 # REST - Client Side Code
@@ -305,10 +448,18 @@ discussions of REST or HTTP, you may see the media type called the “MIME type,
 
 <!-- slide title -->
 # REST - Server Side Code
+* Use frameworks that encourage REST: Sinatra (ruby), Restlet (java), Django & web.py (python)
+* A bit of specification:
+  * Choose your resources
+  * Choose the supported HTTP verbs for each resource
+  * Choose the supported media types
+  * Choose the status codes that will be returned
+  * Think about the link relationships between your resources
+  {:class="incremental"}
+{:class="incremental"}
+  
 
 <!-- slide title -->
-# Démo
-![Grid5000][grid5000_img]
-
-
-[grid5000_img]: images/grid5000.png
+# References
+* RESTful Web Services, by Leonard Richardson and Sam Ruby, ISBN#978-0-596-52926-0
+* [Web Services architecture](http://www.w3.org/TR/ws-arch/)

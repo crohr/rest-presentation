@@ -27,7 +27,7 @@ header = <<-HEADER
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-US">
   <head>
     <meta name="generator" content="HTML Tidy for Linux/x86 (vers 1st November 2003), see www.w3.org" />
-    <title>HTML Slidy</title>
+    <title>Architectures for Distributed Applications</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="copyright" content="Copyright &#169; 2010 INRIA - Rennes Bretagne Atlantique" />
     <meta name="font-size-adjustment" content="-2" />
@@ -42,6 +42,8 @@ header = <<-HEADER
     <script type="text/javascript" src="assets/javascripts/shBrushBash.js"></script>
     <script type="text/javascript" src="assets/javascripts/shBrushPlain.js"></script>
     <script type="text/javascript" src="assets/javascripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushXml.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushJava.js"></script>
     <script type="text/javascript">
       SyntaxHighlighter.defaults['toolbar'] = true // required for collapsed elements
       // SyntaxHighlighter.config.clipboardSwf = 'assets/javascripts/clipboard.swf';
