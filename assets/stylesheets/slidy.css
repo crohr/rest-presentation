@@ -199,7 +199,7 @@ p,pre,ul,ol,blockquote,h2,h3,h4,h5,h6,dl,table {
   margin-right: 1em;
 }
 
-p.subhead { font-weight: bold; margin-top: 2em; }
+p.subhead { font-weight: bold; margin-top: 2em; font-size: 2em; line-height: 2em; }
 
 .smaller { font-size: smaller }
 .bigger { font-size: 130% }
@@ -208,7 +208,7 @@ td,th { padding: 0.2em }
 
 ul {
   margin: 0.5em 1.5em 0.5em 1.5em;
-  padding: 0;
+  padding-left: 20px; 
 }
 
 ol {
