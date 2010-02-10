@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-US">
+  <head>
+    <meta name="generator" content="HTML Tidy for Linux/x86 (vers 1st November 2003), see www.w3.org" />
+    <title>Architectures for Distributed Applications</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="copyright" content="Copyright &#169; 2010 INRIA - Rennes Bretagne Atlantique" />
+    <meta name="font-size-adjustment" content="0" />
+    <link rel="stylesheet" href="assets/stylesheets/slidy.css" type="text/css" media="screen, projection, print" />
+    <link rel="stylesheet" href="assets/stylesheets/custom.css" type="text/css" media="screen, projection, print" />
+    <link rel="stylesheet" href="assets/stylesheets/shCore.css" type="text/css" media="screen, projection, print" />
+    <link rel="stylesheet" href="assets/stylesheets/shThemeDefault.css" type="text/css" media="screen, projection, print" />
+    <script src="assets/javascripts/slidy.js" charset="utf-8" type="text/javascript">
+    </script>
+    <script type="text/javascript" src="assets/javascripts/shCore.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushPlain.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushXml.js"></script>
+    <script type="text/javascript" src="assets/javascripts/shBrushJava.js"></script>
+    <script type="text/javascript">
+      SyntaxHighlighter.defaults['toolbar'] = true // required for collapsed elements
+      // SyntaxHighlighter.config.clipboardSwf = 'assets/javascripts/clipboard.swf';
+      SyntaxHighlighter.all();
+    </script>
+  </head>
+  <body>
+    <div class="background"><img alt="" id="head-icon" src="assets/images/icon-blue.png" /></div>
+    
+<div class="slide cover title centered"><h1 id='service_oriented_architectures'>Service Oriented Architectures</h1>
+
+<p class='subhead'>Styles, Technologies and Applications</p>
+
+<p>Cyril Rohr (IRISA - Equipe Myriads)<br />Feb 4, 2010</p></div>
+<div class="slide title"><h1 id='agenda'>Agenda</h1>
+
+<ol class='incremental'>
+<li>What problem are we trying to address ?</li>
+
+<li>Evolution towards Distributed Applications</li>
+
+<li>Software Services - definition</li>
+
+<li><strong>Web</strong> Services ?</li>
+
+<li>Architectural Styles - RPC vs Service-Oriented vs Resource-Oriented (REST)</li>
+
+<li>Real-World examples</li>
+</ol></div>
+<div class="slide title center"><h1 id='1_problem'>1. Problem</h1>
+
+<p class='subhead'>Complete, closed, monolithic applications</p>
+<img src='images/monolithic-applications.png' /></div>
+<div class="slide title center"><h1 id='1_objectives'>1. Objectives</h1>
+
+<p class='subhead'>Integration across application boundaries</p>
+<img src='images/integration-accross-applications.png' /></div>
+<div class="slide center"><h1 id='1_objectives'>1. Objectives</h1>
+
+<p class='subhead'>Integration across organizational boundaries</p>
+<img src='images/integration-accross-organizations.png' /></div>
+<div class="slide center title"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
+
+<ul class='incremental'>
+<li><strong>Monolithic Applications</strong> <br /><img src='images/monolithic-applications.png' style='margin: 5px' /></li>
+
+<li>duplication, high maintenance cost, no data sharing</li>
+</ul></div>
+<div class="slide center title"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
+
+<ul class='incremental'>
+<li><strong>Applications sharing data</strong><br /><img src='images/applications-sharing-data.png' style='margin: 5px' /></li>
+
+<li>fragile, duplication</li>
+</ul></div>
+<div class="slide center title"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
+
+<ul class='incremental'>
+<li><strong>Applications sharing objects over the network</strong> <br /><div class='incremental' style='clear: both'>
+  <img src='images/applications-bus.png' style='float:left' />
+  <img src='images/applications-bus-enlarged.png' style='float:left' />
+</div> <br /><div style='clear: both' /></li>
+
+<li>complex, vendor lock in, tight coupling</li>
+</ul></div>
+<div class="slide center title"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
+
+<ul class='incremental'>
+<li><strong>Service Oriented Architectures</strong> <br /><img src='images/soa.png' /></li>
+
+<li>language independant, reusability, composability, loose-coupling</li>
+</ul></div>
+<div class="slide title"><h1 id='3_software_services__definition'>3. Software Services - definition</h1>
+
+<ul class='incremental'>
+<li>Software services are units of functionality that exist at a service endpoint (<strong>address</strong>) that can be <strong>remotely</strong> accessed by clients.</li>
+
+<li>Clients can use the service by communicating with this endpoint without having direct access to the actual code files that implement the service.</li>
+
+<li>Loosely coupled</li>
+
+<li>Avoid fine-grained interactions patterns.</li>
+</ul></div>
+<div class="slide"><h1 id='3_software_services__benefits'>3. Software Services - benefits</h1>
+
+<ul class='incremental'>
+<li>Operations across organizations</li>
+
+<li>Language independent</li>
+
+<li>Reusability</li>
+
+<li>Standardization, leading to better interoperability</li>
+</ul></div>
+<div class="slide title center incremental"><h1 id='4_web_services_'>4. <strong>Web</strong> Services ?</h1>
+<img src='images/web-services-pipes.png' />
+<p>Term is often a catch-all for &#8220;services accessible on the web&#8221;</p></div>
+<div class="slide incremental"><h1 id='4_web_services_'>4. <strong>Web</strong> Services ?</h1>
+
+<p>W3C</p>
+
+<blockquote>
+<p>a &#8220;web service&#8221; is &#8220;a <strong>software system</strong> designed to support <strong>interoperable machine-to-machine interaction</strong> over a <strong>network</strong>. It has an <strong>interface</strong> described in a <strong>machine-processable format</strong> (specifically Web Services Description Language WSDL). Other systems interact with the web service in a manner prescribed by its description using <strong>SOAP messages</strong>, typically <strong>conveyed using HTTP</strong> with an XML serialization in conjunction with other web-related standards.&#8221;</p>
+</blockquote>
+
+<p>Web Services (WS) are just one of the technologies available to create distributed architectures. A software service may, but need not be exposed as a Web Service.</p></div>
+<div class="slide incremental title"><h1 id='5_architectural_styles_for_distributed_applications'>5. Architectural Styles for Distributed Applications</h1>
+
+<ul class='incremental'>
+<li>RPC (Remote Procedure Call)</li>
+
+<li>Service/Message Oriented</li>
+
+<li>Resource Oriented</li>
+</ul></div>
+<div class="slide title incremental"><h1 id='5a_rpc'>5A. RPC</h1>
+<img src='images/corba.png' style='float: right' />
+<ul class='incremental'>
+<li>CORBA, DCOM, RMI, XML-RPC&#8230;</li>
+
+<li>Language independency</li>
+
+<li>Apparent simplicity</li>
+</ul></div>
+<div class="slide incremental"><h1 id='5a_rpc__drawbacks'>5A. RPC - drawbacks</h1>
+
+<ul class='incremental'>
+<li>Tight coupling (generated client stub and server skeleton) <img src='images/corba.png' style='float: right' /></li>
+
+<li>No unique standard, leading to poor interoperability</li>
+
+<li>Poor scalability due to serialization/deserialization, but also:</li>
+
+<li>Hides the fact that objects are distributed, thus developer cannot make decisions according to objects locality.</li>
+</ul></div>
+<div class="slide title incremental"><h1 id='5b_message_oriented_architecture'>5B. Message Oriented Architecture</h1>
+
+<ul class='incremental'>
+<li>
+<p>Most often implemented using the WS-* stack <img src='images/web-services.png' style='float: right;' /></p>
+</li>
+
+<li>
+<p>Web Services is a specific set of technologies for exposing Software Services:</p>
+
+<ul>
+<li>the WSDL language for service description</li>
+
+<li>the SOAP language as the message format</li>
+
+<li>the HTTP protocol as the transport layer</li>
+
+<li>the UDDI interface for service discovery</li>
+</ul>
+</li>
+</ul></div>
+<div class="slide incremental"><h1 id='5b_message_oriented_architecture__ws'>5B. Message Oriented Architecture - WS-*</h1>
+
+<p>Java method:</p>
+
+<pre class='brush: java'>public void myMethod(int x, float y);</pre>
+
+<h2 id='wsdl'>WSDL</h2>
+
+<pre class='brush: xml; highlight: [8];'>&lt;message name=&quot;myMethodRequest&quot;&gt;
+    &lt;part name=&quot;x&quot; type=&quot;xsd:int&quot;/&gt;
+    &lt;part name=&quot;y&quot; type=&quot;xsd:float&quot;/&gt;
+&lt;/message&gt;
+&lt;message name=&quot;empty&quot;/&gt;
+
+&lt;portType name=&quot;PT&quot;&gt;
+    &lt;operation name=&quot;myMethod&quot;&gt;
+        &lt;input message=&quot;myMethodRequest&quot;/&gt;
+        &lt;output message=&quot;empty&quot;/&gt;
+    &lt;/operation&gt;
+&lt;/portType&gt;
+
+&lt;binding .../&gt;  </pre>
+
+<h2 id='soap'>SOAP</h2>
+
+<pre class='brush: xml;'>POST /service
+
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2001/12/soap-envelope&quot; soap:encodingStyle=&quot;http://www.w3.org/2001/12/soap-encoding&quot;&gt;
+
+  &lt;soap:Header&gt;
+  ...
+  &lt;/soap:Header&gt;
+
+  &lt;soap:Body&gt;
+    &lt;myMethod&gt;
+        &lt;x xsi:type=&quot;xsd:int&quot;&gt;5&lt;/x&gt;
+        &lt;y xsi:type=&quot;xsd:float&quot;&gt;5.0&lt;/y&gt;
+    &lt;/myMethod&gt;
+  &lt;/soap:Body&gt;
+
+&lt;/soap:Envelope&gt;</pre></div>
+<div class="slide incremental"><h1 id='5b_message_oriented_architecture__benefits'>5B. Message Oriented Architecture - benefits</h1>
+
+<ul class='incremental'>
+<li>Kind of standardized, leading to better interoperability</li>
+
+<li>Easier to change the interface without breaking old clients</li>
+</ul></div>
+<div class="slide incremental"><h1 id='5b_message_oriented_architecture__drawbacks'>5B. Message Oriented Architecture - drawbacks</h1>
+
+<p>Complex, ever-changing specification <br /><img src='images/ws-graph.png' height='335' width='500' style='margin: 5px' /> <br />WS-Security, WS-Policy, WS-SecurityPolicy, WS-PolicyAssertions, WS-PolicyAttachment, WS-Trust, WS-Privacy, WS-Routing, WS-Referral, WS-Coordination, WS-Transaction, WS-SecureConversation, WS-Federation, WS-Authorization, WS-Attachments, WS-Transfer, WS-ResourceTransfer, WS-ReliableMessaging, WS-Addressing, &#8230;</p></div>
+<div class="slide incremental"><h1 id='5b_message_oriented_architecture__drawbacks'>5B. Message Oriented Architecture - drawbacks</h1>
+
+<ul class='incremental'>
+<li>Specification written and pushed by big vendors (IBM, Microsoft, HP, Intel, SAP, Sun, etc.)</li>
+
+<li>Poor interoperability between vendor implementations, leading to vendor lock-in</li>
+
+<li>Most often, developers use early binding =&gt; stubs, proxy objects =&gt; tight-coupling <img src='images/soap.png' height='70%' style='float: right;' width='70%' /></li>
+
+<li>Poor scalability: requires processing power to decode SOAP messages, difficult to load-balance or route requests based on the service endpoint (URI)</li>
+
+<li>UDDI is a failure</li>
+
+<li>Does not use HTTP as an application protocol, only as a transport protocol.</li>
+</ul>
+
+<p>However, some advanced specs may be of interest (Security, QoS) if your environment requires it.</p></div>
+<div class="slide title incremental"><h1 id='5c_restful_services__concepts'>5C. <strong>RESTful</strong> Services - concepts</h1>
+
+<ul class='incremental'>
+<li>
+<p>Representational State Transfer, in <a href='http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm'>Architectural Styles and the Design of Network-based Software Architectures</a> Roy T. Fielding (2000)</p>
+
+<blockquote>
+<p>The REST Web is the subset of the WWW (based on <strong>HTTP</strong>) in which agents provide <strong>uniform interface</strong> semantics &#8211; essentially create (POST), retrieve (GET), update (PUT) and delete (DELETE) &#8211; rather than <strong>arbitrary or application-specific</strong> interfaces, and manipulate <strong>resources</strong> only by the exchange of <strong>representations</strong>. Furthermore, the REST interactions are &#8221;<strong>stateless</strong>&#8221; in the sense that the meaning of a message does not depend on the state of the conversation.</p>
+</blockquote>
+<img src='http-client-server' /></li>
+</ul></div>
+<div class="slide incremental"><h1 id='5c_restful_services__concepts'>5C. <strong>RESTful</strong> Services - concepts</h1>
+
+<h2 id='resources'>Resources</h2>
+
+<ul class='incremental'>
+<li>
+<p>Functionalities offered by the service are exposed under the form of resources (e.g. jobs, users, payments, orders, friends&#8230;)</p>
+
+<blockquote>
+<p>A resource can be anything that has identity (RFC 2396)</p>
+</blockquote>
+</li>
+
+<li>
+<p>Real objects (user, site) or abstract concepts (status, payment)</p>
+</li>
+
+<li>
+<p>A resource may have <strong>multiple representations</strong>. E.g. a calendar may be represented using</p>
+
+<pre>  image/png, text/html, application/pdf, application/xml, text/calendar</pre>
+</li>
+</ul>
+
+<h2 id='uri'>URI</h2>
+
+<ul class='incremental'>
+<li>Uniquely identifies each resource using a standardized syntax (http://server.com/users/crohr, https://bank.com/accounts, ftp://ftp-server/document, mailto:cyril.rohr@irisa.fr, xmpp://crohr@jabber.grid5000.fr&#8230;).</li>
+
+<li>Allow the use of <strong>hypermedia</strong> links to navigate from resource to resource.</li>
+</ul></div>
+<div class="slide incremental"><h1 id='5c_restful_services__concepts'>5C. <strong>RESTful</strong> Services - concepts</h1>
+
+<h2 id='unified_interface'>Unified interface</h2>
+
+<p>All resources share the same interface for transfering state between the client and the resource:</p>
+
+<ul class='incremental'>
+<li>
+<p>a restricted set of well-defined operations (HTTP <em>verbs</em>)</p>
+
+<pre>  GET             fetch a resource
+  POST            create a new resource
+  PUT             update a resource
+  DELETE          delete a resource
+  ...</pre>
+</li>
+
+<li>
+<p>a restricted set of standard <a href='http://www.iana.org/assignments/media-types/'>media types</a></p>
+
+<pre>  text/html, image/png, application/xml...</pre>
+
+<p>&#8230;but you can define your own.</p>
+</li>
+
+<li>
+<p>a restricted set of <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html'>status codes</a></p>
+
+<pre>  200 (OK), 201 (Created), 202 (Accepted), 
+  303 (See Other), 304 (Not Modified), 
+  400 (Bad Request), 404 (Not Found), 409 (Conflict), 
+  500 (Internal Server Error)
+  ...</pre>
+</li>
+</ul></div>
+<div class="slide incremental"><h1 id='5c_restful_services__concepts'>5C. <strong>RESTful</strong> Services - concepts</h1>
+
+<h2 id='http'>HTTP</h2>
+
+<ul class='incremental'>
+<li>Client-Server protocol <img src='images/http-client-server' style='float:right' /></li>
+
+<li>Stateless (each operation is self-sufficient)</li>
+
+<li>Cacheable</li>
+
+<li>Layered (intermediaries can be inserted between client and server, such as proxy, firewall, load-balancer, etc.) <div class='incremental'>
+  <img src='images/infrastructure-2.png' height='25%' width='25%' style='float:left' />
+  <img src='images/infrastructure-3.png' height='25%' width='25%' style='float:left' />
+  <img src='images/infrastructure-4.png' height='25%' width='25%' style='float:left' />
+  <img src='images/infrastructure-5.png' height='25%' width='25%' style='float:left' />
+</div></li>
+</ul></div>
+<div class="slide incremental"><h1 id='5c_restful_services__benefits'>5C. <strong>RESTful</strong> Services - benefits</h1>
+
+<ul class='incremental'>
+<li>
+<p><strong>Scalability</strong> thanks to: cacheable requests (GET&#160;&#187; POST,PUT,DELETE), and statelessness (requests are not bound to a specific server).</p>
+</li>
+
+<li>
+<p><strong>Interoperability</strong>: the only thing that changes is the name of resources. Available HTTP verbs, status codes, etc. are always identical from one service to another =&gt; &#8220;given a URI, anyone already knows how to access it&#8221;.</p>
+</li>
+
+<li>
+<p><strong>Addressability</strong>: each resource is uniquely identified.</p>
+
+<pre>  https://api.grid5000.fr/sid/grid5000/sites/rennes</pre>
+</li>
+
+<li>
+<p><strong>Versioning</strong> is easy: insert a version number in the URI (or use a custom HTTP Header), and dispatch accordingly to the correct server.</p>
+</li>
+
+<li>
+<p><strong>Control</strong> meta-data (HTTP headers, both in Request and Response)</p>
+
+<pre>  Accept: application/json [format]
+  Cache-Control: max-age=120 [cache]
+  Accept-Encoding: gzip, deflate [compression]
+  Accept-Language: us,en;q=0.5 [language]
+  Accept-Charset: ISO-8859-15,utf-8;q=0.7,*;q=0.7 [charset]
+  ...
+  You can define your own: X-Api-Version, X-Api-User...</pre>
+</li>
+
+<li>
+<p>Removes unnecessary complexity: headers, methods, status codes, media types are already standardized. The protocol is well documented, and in use since the Web exists. It&#8217;s not another protocol on top of another protocol on top of another protocol on top of&#8230;</p>
+</li>
+</ul></div>
+<div class="slide incremental"><h1 id='5c_restful_services__benefits'>5C. <strong>RESTful</strong> Services - benefits</h1>
+
+<ul class='incremental'>
+<li><strong>Security</strong>: uses the inherent HTTP security model, certain methods to certain URIs can easily be restricted by firewall/proxy configuration.</li>
+
+<li><strong>Ubiquity</strong>: every programming language can speak HTTP</li>
+
+<li><strong>Layered</strong> architecture</li>
+</ul></div>
+<div class="slide incremental"><h1 id='5c_restful_services__constraints'>5C. <strong>RESTful</strong> Services - constraints</h1>
+
+<ul class='incremental'>
+<li>
+<p>Requires to <strong>carefully choose</strong> the HTTP verb among those available</p>
+
+<pre>  GET     safe        (doesn&#39;t change the state of the resource on the server)
+          idempotent  (same operation can be applied multiple times 
+                       and will always return the same result)
+          cacheable 
+  PUT     idempotent 
+  DELETE  idempotent 
+  POST 
+  ...</pre>
+</li>
+
+<li>
+<p><strong>Stateless</strong>: each communication must include all the material required for the server to understand the context.</p>
+</li>
+
+<li>
+<p>Do NOT disguise RPC calls as HTTP requests (Flickr API):</p>
+
+<pre>  GET /service?action=getUser&amp;id=crohr&amp;...
+  
+  POST /service
+  {
+    &quot;action&quot;: &quot;getUser&quot;,
+    &quot;id&quot;: &quot;crohr&quot;,
+    ...
+  }</pre>
+</li>
+</ul></div>
+<div class="slide incremental"><h1 id='5c_restful_services__howto'>5C. <strong>RESTful</strong> Services - HowTo</h1>
+
+<ul class='incremental'>
+<li>
+<p>A bit of specification:</p>
+
+<ul>
+<li>Choose your resources</li>
+
+<li>Choose the supported HTTP verbs for each resource</li>
+
+<li>Choose the supported media types</li>
+
+<li>Choose the status codes that will be returned</li>
+
+<li>Think about the link relationships between your resources</li>
+</ul>
+</li>
+</ul>
+
+<ul class='incremental'>
+<li>
+<p>Use frameworks that encourage REST style: Sinatra (ruby), Restlet (java), Django &amp; web.py (python)&#8230;</p>
+</li>
+
+<li>
+<p>Think about non-functional aspects</p>
+
+<ul>
+<li>Authentication: use Basic-Auth, Digest or SSL Client Certificates. Avoid sessions and tokens stored in cookies.</li>
+
+<li>Caching: max-age, public/private, ETags, Last-Modified</li>
+
+<li>Request dispatching &amp; Load balancing, based on URI/IP/Geolocation/Traffic congestion&#8230;</li>
+</ul>
+</li>
+</ul></div>
+<div class="slide title"><h1 id='5c_restful_services__client_side_code'>5C. <strong>RESTful</strong> Services - Client Side Code</h1>
+
+<ul>
+<li>
+<p>Ruby</p>
+
+<pre class='brush: ruby'>  require &#39;restclient&#39;
+  response = RestClient.get &quot;https://api.grid5000.fr/sid/grid5000&quot;, :user =&gt; &quot;crohr&quot;, :password =&gt; &quot;whatever&quot;</pre>
+</li>
+
+<li>
+<p>cURL</p>
+
+<pre class='brush: bash'>  $ curl -X GET -kni https://api.grid5000.fr/sid/grid5000</pre>
+</li>
+
+<li>
+<p>Javascript (<a href='http://jquery.com'>jQuery</a>)</p>
+
+<pre>  $.ajax({
+    url: &quot;http://some/url&quot;,
+    dataType: &quot;json&quot;,
+    success: function(data) {
+      // do something
+    },
+    error: function() {},
+    ...
+  })
+{:class=&quot;brush: ruby&quot;}</pre>
+</li>
+
+<li>
+<p>Example of a response</p>
+
+<pre class='brush: js; collapse: false; highlight: [1,3,4,5,6,7,8,9,10,11,17,42]'>  HTTP/1.1 200 OK
+  Date: Fri, 29 Jan 2010 12:12:14 GMT
+  ETag: &quot;ca5998adb91af61b9f9c57f2a26f71edebea5ffc&quot;
+  Allow: GET
+  Cache-Control: public, must-revalidate
+  Last-Modified: Mon, 25 Jan 2010 15:31:30 GMT
+  Content-Length: 998
+  Status: 200
+  Content-Type: application/vnd.fr.grid5000.api.grid+json;level=1
+  Age: 15023
+  X-Cache: HIT from api-proxy.rennes.grid5000.fr
+  
+  {
+    &quot;uid&quot;: &quot;grid5000&quot;,
+    &quot;type&quot;: &quot;grid&quot;,
+    &quot;version&quot;: &quot;1cd3a84ff0c25d269cb24ac294e29b0fe8c111c5&quot;,
+    &quot;links&quot;: [
+      {
+        &quot;href&quot;: &quot;/sid/grid5000/versions/1cd3a84ff0c25d269cb24ac294e29b0fe8c111c5&quot;,
+        &quot;title&quot;: &quot;version&quot;,
+        &quot;rel&quot;: &quot;member&quot;,
+        &quot;type&quot;: &quot;application/vnd.fr.grid5000.api.Version+json;level=1&quot;
+      },
+      {
+        &quot;href&quot;: &quot;/sid/grid5000/versions&quot;,
+        &quot;title&quot;: &quot;versions&quot;,
+        &quot;rel&quot;: &quot;collection&quot;,
+        &quot;type&quot;: &quot;application/vnd.fr.grid5000.api.Collection+json;level=1&quot;
+      },
+      {
+        &quot;href&quot;: &quot;/sid/grid5000&quot;,
+        &quot;rel&quot;: &quot;self&quot;,
+        &quot;type&quot;: &quot;application/vnd.fr.grid5000.api.Grid+json;level=1&quot;
+      },
+      {
+        &quot;href&quot;: &quot;/sid/grid5000/environments&quot;,
+        &quot;title&quot;: &quot;environments&quot;,
+        &quot;rel&quot;: &quot;collection&quot;,
+        &quot;type&quot;: &quot;application/vnd.fr.grid5000.api.Collection+json;level=1&quot;
+      },
+      {
+        &quot;href&quot;: &quot;/sid/grid5000/sites&quot;,
+        &quot;title&quot;: &quot;sites&quot;,
+        &quot;rel&quot;: &quot;collection&quot;,
+        &quot;type&quot;: &quot;application/vnd.fr.grid5000.api.Collection+json;level=1&quot;
+      }
+    ]
+  }</pre>
+</li>
+</ul></div>
+<div class="slide title"><h1 id='5c_restful_services__server_side_code'>5C. <strong>RESTful</strong> Services - Server Side Code</h1>
+
+<pre class='brush: ruby'>require &#39;rubygems&#39;
+require &#39;sinatra/base&#39;  # gem install sinatra
+require &#39;json&#39;          # gem install json
+
+class API &lt; Sinatra::Base
+  
+  configure do
+    # some configuration here
+  end
+  
+  get         &#39;/URI&#39;   { do_something }
+  post        &#39;/URI&#39;   { do_something }
+  put         &#39;/URI&#39;   { do_something }
+  delete      &#39;/URI&#39;   { do_something }
+  
+end
+API.run! :host =&gt; &quot;localhost&quot;, :port =&gt; 4567</pre>
+
+<p>See http://github.com/crohr/rest-presentation/app for a complete application.</p></div>
+<div class="slide incremental"><h1 id='5c_restful_services__hal'>5C. <strong>RESTful</strong> Services - HAL</h1>
+
+<h2 id='specification'>Specification</h2>
+
+<ul>
+<li>
+<p>authors</p>
+
+<pre>  GET     /authors?affiliations=x,y,z  fetch the list of authors,              json         200,304,406,500
+                                       optionally filtered by affiliations     
+  POST    /authors                     create a new author                     json         201,400,406,415,500
+  DELETE  /authors/:author_id          delete the author                                    204,500
+  PUT     /authors/:author_id          update an author                        json         200,400,406,415,500</pre>
+</li>
+
+<li>
+<p>papers</p>
+
+<pre>  GET     /papers?tags=x,y,z           fetch the list of papers,               json         200,304,406,500
+                                       optionally filtered by tags
+  POST    /papers                      create a new paper                      json         201,400,406,415,500
+  DELETE  /papers/:paper_id            delete the paper                                     204,500
+  PUT     /papers/:paper_id            update a paper. deal with conflicts.    json,text,   200,400,406,415,500
+                                                                               html,pdf,
+                                                                               latex</pre>
+</li>
+
+<li>
+<p>convenience collections</p>
+
+<pre>  GET     /authors/:author_id/papers   fetch the papers of a specific author   json
+  GET     /papers/:paper_id/authors    fetch the authors of a specific paper   json</pre>
+</li>
+</ul></div>
+<div class="slide incremental"><h1 id='6_restful_services__realworld_examples__grid5000'>6. <strong>RESTful</strong> Services - Real-World examples - Grid5000</h1>
+<img src='images/grid5000.png' height='80%' style='float:left' width='70%' /></div>
+<div class="slide incremental"><h1 id='6_restful_services__realworld_examples__in_the_wild'>6. <strong>RESTful</strong> Services - Real-World examples - In the wild</h1>
+
+<h2 id='restful'>RESTful</h2>
+
+<ul>
+<li>Amazon S3 API: http://docs.amazonwebservices.com/AmazonS3/latest/API/</li>
+
+<li>Netflix API: http://developer.netflix.com/docs/REST_API_Reference</li>
+
+<li>Sun Cloud API: http://kenai.com/projects/suncloudapis/pages/Home</li>
+
+<li>Google Data API: http://code.google.com/apis/gdata/docs/2.0/basics.html</li>
+</ul>
+
+<h2 id='not_restful'>Not RESTful</h2>
+
+<ul>
+<li>Digg API: http://digg.com/api/docs/overview</li>
+
+<li>Flickr API: http://www.flickr.com/services/api/</li>
+</ul></div>
+<div class="slide title"><h1 id='references'>References</h1>
+
+<ul>
+<li>RESTful Web Services, by Leonard Richardson and Sam Ruby, ISBN#978-0-596-52926-0</li>
+
+<li>http://tech.groups.yahoo.com/group/rest-discuss</li>
+
+<li>http://code.google.com/p/implementing-rest</li>
+
+<li>HTTP/1.1 Method Definitions - http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html</li>
+
+<li>HTTP/1.1 Status Code Definitions - http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</li>
+
+<li>HTTP/1.1 Header Field Definitions - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html</li>
+
+<li>http://www.subbu.org/</li>
+
+<li><a href='http://www.w3.org/TR/ws-arch/'>Web Services architecture</a></li>
+
+<li>Sinatra Ruby framework: http://www.sinatrarb.com</li>
+</ul></div>
+<div class="slide title"><h1 id='questions'>Questions</h1></div>  </body>
+</html>
