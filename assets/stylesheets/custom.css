@@ -31,9 +31,8 @@ table th {
   background: #70a8c4;
 }
 table td.highlighted {
-  background: #66cc33;
-  border-bottom: 1px solid black;
-  border-top: 1px solid black;
+  background: #eee;
+  border: 2px solid #ccc;
 }
 table td {
   background: #eee;
