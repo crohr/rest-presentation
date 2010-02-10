@@ -1,14 +1,7 @@
-
-<!-- putting some comments here
-this needs a lot more work :-) but is already more powerful than showoff
-Needs to set and use more of the meta-declarations such as {:ruby}, {:incremental}, etc.
--->
-
-
 <!-- slide cover title centered -->
 # Service Oriented Architectures  
-  
-  
+
+
 Styles, Technologies and Applications 
 {:class="subhead"}
 
@@ -17,66 +10,66 @@ Feb 4, 2010
 
 <!-- slide title -->
 # Agenda
-* What problem are we trying to solve ?
-* **Web** Services ?
-* Architectural Styles - RPC vs Service-Oriented vs Resource-Oriented
-* REST (Representation State Transfer): the style of the Web
-* Technologies for building RESTful Web Services
-* Real-World example: Grid5000 APIs
+1. What problem are we trying to address ?
+2. Evolution towards Distributed Applications
+3. Software Services - definition
+4. **Web** Services ?
+5. Architectural Styles - RPC vs Service-Oriented vs Resource-Oriented (REST)
+6. Real-World examples
 {:class="incremental"}
 
 <!-- slide title center -->
-# Problem
+# 1. Problem
 Complete, closed, monolithic applications
 {:class="subhead"}
 <img src="images/monolithic-applications.png" />
 
 <!-- slide title center -->
-# Objectives
+# 1. Objectives
 Integration across application boundaries
 {:class="subhead"}
 <img src="images/integration-accross-applications.png" />
 
 <!-- slide center -->
-# Objectives
+# 1. Objectives
 Integration across organizational boundaries
 {:class="subhead"}
 <img src="images/integration-accross-organizations.png" />
 
 <!-- slide center title -->
-# Evolution towards Distributed Applications
+# 2. Evolution towards Distributed Applications
 * **Monolithic Applications**   
   <img src="images/monolithic-applications.png" style="margin: 5px" />    
 * duplication, high maintenance cost, no data sharing  
 {:class="incremental"}
 
 <!-- slide center title -->
-# Evolution towards Distributed Applications
+# 2. Evolution towards Distributed Applications
 * **Applications sharing data**  
   <img src="images/applications-sharing-data.png" style="margin: 5px" />    
 * fragile, duplication   
 {:class="incremental"}
 
 <!-- slide center title -->
-# Evolution towards Distributed Applications
+# 2. Evolution towards Distributed Applications
 * **Applications sharing objects over the network**   
   <div class="incremental" style="clear: both">
     <img src="images/applications-bus.png" style="float:left" />
     <img src="images/applications-bus-enlarged.png" style="float:left" />
   </div>    
   <div style="clear: both"></div>
-* complex, vendor lock in, tight coupling, often language dependent  
+* complex, vendor lock in, tight coupling 
 {:class="incremental"}
 
 <!-- slide center title -->
-# Evolution towards Distributed Applications
+# 2. Evolution towards Distributed Applications
 * **Service Oriented Architectures**    
   <img src="images/soa.png" />   
 * language independant, reusability, composability, loose-coupling  
 {:class="incremental"}
 
 <!-- slide title -->
-# Software Services - definition
+# 3. Software Services - definition
 * Software services are units of functionality that exist at a service endpoint (**address**) that can be **remotely** accessed by clients. 
 * Clients can use the service by communicating with this endpoint without having direct access to the actual code files that implement the service.
 * Loosely coupled
@@ -84,7 +77,7 @@ Integration across organizational boundaries
 {:class="incremental"}
 
 <!-- slide -->
-# Software Services - benefits
+# 3. Software Services - benefits
 * Operations across organizations
 * Language independent
 * Reusability
@@ -92,54 +85,45 @@ Integration across organizational boundaries
 {:class="incremental"}
 
 <!-- slide title center incremental -->
-# **Web** Services ?
+# 4. **Web** Services ?
 <img src="images/web-services-pipes.png" />
 Term is often a catch-all for "services accessible on the web"
 
 <!-- slide incremental -->
-# **Web** Services ?
+# 4. **Web** Services ?
 W3C
-> a "web service" is "a software system designed to support interoperable machine-to-machine interaction over a network. 
-> It has an interface described in a machine-processable format (specifically Web Services Description Language WSDL). 
-> Other systems interact with the web service in a manner prescribed by its description using SOAP messages, typically conveyed using HTTP with an XML serialization in conjunction with other web-related standards."
+> a "web service" is "a **software system** designed to support **interoperable machine-to-machine interaction** over a **network**. 
+> It has an **interface** described in a **machine-processable format** (specifically Web Services Description Language WSDL). 
+> Other systems interact with the web service in a manner prescribed by its description using **SOAP messages**, typically **conveyed using HTTP** with an XML serialization in conjunction with other web-related standards."
 
 Web Services (WS) are just one of the technologies available to create distributed architectures. A software service may, but need not be exposed as a Web Service.
 
 <!-- slide incremental title -->
-# Architectural Styles for Distributed Applications
+# 5. Architectural Styles for Distributed Applications
 * RPC (Remote Procedure Call)
 * Service/Message Oriented
 * Resource Oriented
 {:class="incremental"}
 
-<div style="margin: auto; width: 60%; margin-top: 30px;">
-  <table cellspacing="0">
-    <tr><th>Style</th><th>Technologies</th></tr>
-    <tr><td>Service Oriented Architecture</td><td class="highlighted">SOAP+WSDL</td></tr>
-    <tr><td>Resource Oriented Architecture</td><td>HTTP+URI</td></tr>
-    <tr><td>RPC</td><td>CORBA, DCOM, RMI, ...</td></tr>
-  </table>
-</div>
-
 <!-- slide title incremental -->
-# RPC
+# 5A. RPC
+<img src="images/corba.png" style="float: right"/>
 * CORBA, DCOM, RMI, XML-RPC...
-  <img src="images/corba.png" style="float: right"/>
 * Language independency
 * Apparent simplicity
 {:class="incremental"}
 
 <!-- slide incremental -->
-# RPC - drawbacks
-* Tight coupling (genrated client stub and server skeleton)
+# 5A. RPC - drawbacks
+* Tight coupling (generated client stub and server skeleton)
   <img src="images/corba.png" style="float: right"/>
 * No unique standard, leading to poor interoperability
-* Poor scalability due to serialization/deserialization, statefulness, but also
+* Poor scalability due to serialization/deserialization, but also:
 * Hides the fact that objects are distributed, thus developer cannot make decisions according to objects locality.
 {:class="incremental"}
 
 <!-- slide title incremental -->
-# Message Oriented Architecture
+# 5B. Message Oriented Architecture
 * Most often implemented using the WS-\* stack
   <img src="images/web-services.png" style="float: right;" />
 * Web Services is a specific set of technologies for exposing Software Services:
@@ -151,7 +135,7 @@ Web Services (WS) are just one of the technologies available to create distribut
 {:class="incremental"}
 
 <!-- slide incremental -->
-# Message Oriented Architecture - WS-\*
+# 5B. Message Oriented Architecture - WS-\*
 Java method:
 
     public void myMethod(int x, float y);
@@ -175,60 +159,44 @@ Java method:
   {:class="brush: xml; highlight: [8];"}
 
 ## SOAP
+    POST /service
+    
     <?xml version="1.0"?>
     <soap:Envelope xmlns:soap="http://www.w3.org/2001/12/soap-envelope" soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
-  
+    
       <soap:Header>
       ...
       </soap:Header>
-  
+    
       <soap:Body>
         <myMethod>
             <x xsi:type="xsd:int">5</x>
             <y xsi:type="xsd:float">5.0</y>
         </myMethod>
       </soap:Body>
-  
-    </soap:Envelope>
-  {:class="brush: xml;"}
-
-    HTTP/1.1 200 OK
-    Content-Type: application/soap+xml; charset=utf-8
-    Content-Length: 234
-  
-    <?xml version="1.0"?>
-    <soap:Envelope
-    xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
-    soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
-  
-    <soap:Body>
-      <m:GetPriceResponse xmlns:m="http://www.w3schools.com/prices">
-        <m:Price>1.90</m:Price>
-      </m:GetPriceResponse>
-    </soap:Body>
-
+    
     </soap:Envelope>
   {:class="brush: xml;"}
 
 <!-- slide incremental -->
-# Message Oriented Architecture - benefits
+# 5B. Message Oriented Architecture - benefits
 * Kind of standardized, leading to better interoperability
 * Easier to change the interface without breaking old clients
 {:class="incremental"}
 
 <!-- slide incremental -->
-# Message Oriented Architecture - drawbacks
+# 5B. Message Oriented Architecture - drawbacks
 Complex, ever-changing specification    
 <img src="images/ws-graph.png" width="500" height="335" style="margin: 5px" />    
 WS-Security, WS-Policy, WS-SecurityPolicy, WS-PolicyAssertions, WS-PolicyAttachment, WS-Trust, WS-Privacy, WS-Routing, WS-Referral, WS-Coordination, WS-Transaction, WS-SecureConversation, WS-Federation, WS-Authorization, WS-Attachments, WS-Transfer, WS-ResourceTransfer, WS-ReliableMessaging, WS-Addressing, ...
 
 <!-- slide incremental -->
-# Message Oriented Architecture - drawbacks
+# 5B. Message Oriented Architecture - drawbacks
 * Specification written and pushed by big vendors (IBM, Microsoft, HP, Intel, SAP, Sun, etc.)
 * Poor interoperability between vendor implementations, leading to vendor lock-in
 * Most often, developers use early binding => stubs, proxy objects => tight-coupling
   <img src="images/soap.png" style="float: right;" height="70%" width="70%" />
-* Poor scalability: interactions are stateful, requires processing power to decode SOAP messages, difficult to load-balance or route requests based on the service endpoint (URI)
+* Poor scalability: requires processing power to decode SOAP messages, difficult to load-balance or route requests based on the service endpoint (URI)
 * UDDI is a failure
 * Does not use HTTP as an application protocol, only as a transport protocol.
 {:class="incremental"}
@@ -236,15 +204,15 @@ WS-Security, WS-Policy, WS-SecurityPolicy, WS-PolicyAssertions, WS-PolicyAttachm
 However, some advanced specs may be of interest (Security, QoS) if your environment requires it.
 
 <!-- slide title incremental -->
-# **RESTful** Services - concepts
+# 5C. **RESTful** Services - concepts
 * Representational State Transfer, in [Architectural Styles and the Design of Network-based Software Architectures](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) Roy T. Fielding (2000) 
-  > The REST Web is the subset of the WWW (based on **HTTP**) in which agents provide uniform **interface semantics** -- essentially create (POST), retrieve (GET), update (PUT) and delete (DELETE) -- rather than **arbitrary or application-specific** interfaces, and manipulate **resources** only by the exchange of **representations**. 
+  > The REST Web is the subset of the WWW (based on **HTTP**) in which agents provide **uniform interface** semantics -- essentially create (POST), retrieve (GET), update (PUT) and delete (DELETE) -- rather than **arbitrary or application-specific** interfaces, and manipulate **resources** only by the exchange of **representations**. 
   > Furthermore, the REST interactions are "**stateless**" in the sense that the meaning of a message does not depend on the state of the conversation.
   <img src="http-client-server" />
 {:class="incremental"}
 
 <!-- slide incremental -->
-# **RESTful** Services - concepts
+# 5C. **RESTful** Services - concepts
 
 ## Resources
 * Functionalities offered by the service are exposed under the form of resources (e.g. jobs, users, payments, orders, friends...)
@@ -257,11 +225,11 @@ However, some advanced specs may be of interest (Security, QoS) if your environm
 
 ## URI
 * Uniquely identifies each resource using a standardized syntax (http://server.com/users/crohr, https://bank.com/accounts, ftp://ftp-server/document, mailto:cyril.rohr@irisa.fr, xmpp://crohr@jabber.grid5000.fr...). 
-* Allows the use of **hypermedia** links to navigate from service to service.
+* Allow the use of **hypermedia** links to navigate from resource to resource.
 {:class="incremental"}
 
 <!-- slide incremental -->
-# **RESTful** Services - concepts
+# 5C. **RESTful** Services - concepts
 
 ## Unified interface
 All resources share the same interface for transfering state between the client and the resource:
@@ -288,7 +256,7 @@ All resources share the same interface for transfering state between the client 
 {:class="incremental"}
 
 <!-- slide incremental -->
-# **RESTful** Services - concepts
+# 5C. **RESTful** Services - concepts
 
 ## HTTP
 * Client-Server protocol
@@ -296,20 +264,23 @@ All resources share the same interface for transfering state between the client 
 * Stateless (each operation is self-sufficient)
 * Cacheable
 * Layered (intermediaries can be inserted between client and server, such as proxy, firewall, load-balancer, etc.)
-  <img src="images/http-intermediaries" style="float:right" height="50%" width="50%" />
+  <div class="incremental">
+    <img src="images/infrastructure-2.png" width="25%" height="25%" style="float:left" />
+    <img src="images/infrastructure-3.png" width="25%" height="25%" style="float:left" />
+    <img src="images/infrastructure-4.png" width="25%" height="25%" style="float:left" />
+    <img src="images/infrastructure-5.png" width="25%" height="25%" style="float:left" />
+  </div>
 {:class="incremental"}
 
-HTTP may look like a messaging system at first glance, but it's not, it's a representation transfer system, no messages are ever sent back and forth, only **requests** and **responses** as **representations** of the **resources** modelled on the server.
-
 <!-- slide incremental -->
-# **RESTful** Services - benefits
-* **Scalability**: cacheable requests (GET >> POST,PUT,DELETE), statelessness: requests are not bound to a specific server.
+# 5C. **RESTful** Services - benefits
+* **Scalability** thanks to: cacheable requests (GET >> POST,PUT,DELETE), and statelessness (requests are not bound to a specific server).
 * **Interoperability**: the only thing that changes is the name of resources. Available HTTP verbs, status codes, etc. are always identical from one service to another => "given a URI, anyone already knows how to access it".
 * **Addressability**: each resource is uniquely identified. 
 
         https://api.grid5000.fr/sid/grid5000/sites/rennes
 * **Versioning** is easy: insert a version number in the URI (or use a custom HTTP Header), and dispatch accordingly to the correct server.
-* **Control** meta-data (HTTP headers)
+* **Control** meta-data (HTTP headers, both in Request and Response)
         
         Accept: application/json [format]
         Cache-Control: max-age=120 [cache]
@@ -323,20 +294,14 @@ HTTP may look like a messaging system at first glance, but it's not, it's a repr
 {:class="incremental"}
 
 <!-- slide incremental -->
-# **RESTful** Services - benefits
+# 5C. **RESTful** Services - benefits
 * **Security**: uses the inherent HTTP security model, certain methods to certain URIs can easily be restricted by firewall/proxy configuration.
 * **Ubiquity**: every programming language can speak HTTP
 * **Layered** architecture
-  <div class="incremental">
-    <img src="images/infrastructure-2.png" width="25%" height="25%" style="float:left" />
-    <img src="images/infrastructure-3.png" width="25%" height="25%" style="float:left" />
-    <img src="images/infrastructure-4.png" width="25%" height="25%" style="float:left" />
-    <img src="images/infrastructure-5.png" width="25%" height="25%" style="float:left" />
-  </div>
 {:class="incremental"}
 
 <!-- slide incremental -->
-# **RESTful** Services - constraints
+# 5C. **RESTful** Services - constraints
 * Requires to **carefully choose** the HTTP verb among those available
 
         GET     safe        (doesn't change the state of the resource on the server)
@@ -362,7 +327,7 @@ HTTP may look like a messaging system at first glance, but it's not, it's a repr
 {:class="incremental"}
 
 <!-- slide incremental -->
-# **RESTful** Services - HowTo
+# 5C. **RESTful** Services - HowTo
 
 * A bit of specification:
   * Choose your resources
@@ -379,39 +344,34 @@ HTTP may look like a messaging system at first glance, but it's not, it's a repr
   {:class="incremental"}
 {:class="incremental"}
 
-
-<!-- slide incremental -->
-# **RESTful** Services - Practical
-authors, papers, reviewers
-
-
-<!-- slide incremental -->
-# **RESTful** Services - Real-World examples
-## RESTful
-* Amazon S3 API: http://docs.amazonwebservices.com/AmazonS3/latest/API/
-* Netflix API: http://developer.netflix.com/docs/REST\_API\_Reference
-
-## Not RESTful
-* Digg API: http://digg.com/api/docs/overview
-* Flickr API: 
-
-<!-- slide incremental -->
-# **RESTful** Services - Grid5000
-<img src="images/grid5000.png" style="float:left" width="70%" height="80%" />
-
 <!-- slide title -->
-# REST - Client Side Code
+# 5C. **RESTful** Services - Client Side Code
 
 * Ruby
 
         require 'restclient'
-        RestClient.get "https://api.grid5000.fr/sid/grid5000", :user => "crohr", :password => "whatever"
+        response = RestClient.get "https://api.grid5000.fr/sid/grid5000", :user => "crohr", :password => "whatever"
     {:class="brush: ruby"}
 * cURL
         
         $ curl -X GET -kni https://api.grid5000.fr/sid/grid5000
     {:class="brush: bash"}
-    
+
+* Javascript ([jQuery](http://jquery.com))
+        
+        $.ajax({
+          url: "http://some/url",
+          dataType: "json",
+          success: function(data) {
+            // do something
+          },
+          error: function() {},
+          ...
+        })
+      {:class="brush: ruby"}
+
+* Example of a response
+
         HTTP/1.1 200 OK
         Date: Fri, 29 Jan 2010 12:12:14 GMT
         ETag: "ca5998adb91af61b9f9c57f2a26f71edebea5ffc"
@@ -423,7 +383,7 @@ authors, papers, reviewers
         Content-Type: application/vnd.fr.grid5000.api.grid+json;level=1
         Age: 15023
         X-Cache: HIT from api-proxy.rennes.grid5000.fr
-
+        
         {
           "uid": "grid5000",
           "type": "grid",
@@ -460,22 +420,85 @@ authors, papers, reviewers
             }
           ]
         }
-    {:class="brush: js; collapse: true; highlight: [1,3,4,5,6,7,8,9,10,11,17,42]"}
+    {:class="brush: js; collapse: false; highlight: [1,3,4,5,6,7,8,9,10,11,17,42]"}
 
 <!-- slide title -->
-# REST - Server Side Code
+# 5C. **RESTful** Services - Server Side Code
 
-  
+    require 'rubygems'
+    require 'sinatra/base'  # gem install sinatra
+    require 'json'          # gem install json
+    
+    class API < Sinatra::Base
+      
+      configure do
+        # some configuration here
+      end
+      
+      get         '/URI'   { do_something }
+      post        '/URI'   { do_something }
+      put         '/URI'   { do_something }
+      delete      '/URI'   { do_something }
+      
+    end
+    API.run! :host => "localhost", :port => 4567
+  {:class="brush: ruby"}
+
+See http://github.com/crohr/rest-presentation/app for a complete application.
+
+
+<!-- slide incremental -->
+# 5C. **RESTful** Services - HAL
+## Specification
+* authors
+
+        GET     /authors?affiliations=x,y,z  fetch the list of authors,              json         200,304,406,500
+                                             optionally filtered by affiliations     
+        POST    /authors                     create a new author                     json         201,400,406,415,500
+        DELETE  /authors/:author_id          delete the author                                    204,500
+        PUT     /authors/:author_id          update an author                        json         200,400,406,415,500
+* papers                                     
+                                             
+        GET     /papers?tags=x,y,z           fetch the list of papers,               json         200,304,406,500
+                                             optionally filtered by tags
+        POST    /papers                      create a new paper                      json         201,400,406,415,500
+        DELETE  /papers/:paper_id            delete the paper                                     204,500
+        PUT     /papers/:paper_id            update a paper. deal with conflicts.    json,text,   200,400,406,415,500
+                                                                                     html,pdf,
+                                                                                     latex
+* convenience collections                    
+                                             
+        GET     /authors/:author_id/papers   fetch the papers of a specific author   json
+        GET     /papers/:paper_id/authors    fetch the authors of a specific paper   json
+
+
+<!-- slide incremental -->
+# 6. **RESTful** Services - Real-World examples - Grid5000
+<img src="images/grid5000.png" style="float:left" width="70%" height="80%" />
+
+<!-- slide incremental -->
+# 6. **RESTful** Services - Real-World examples - In the wild
+## RESTful
+* Amazon S3 API: http://docs.amazonwebservices.com/AmazonS3/latest/API/
+* Netflix API: http://developer.netflix.com/docs/REST\_API\_Reference
+* Sun Cloud API: http://kenai.com/projects/suncloudapis/pages/Home
+* Google Data API: http://code.google.com/apis/gdata/docs/2.0/basics.html
+
+## Not RESTful
+* Digg API: http://digg.com/api/docs/overview
+* Flickr API: http://www.flickr.com/services/api/
 
 <!-- slide title -->
 # References
 * RESTful Web Services, by Leonard Richardson and Sam Ruby, ISBN#978-0-596-52926-0
 * http://tech.groups.yahoo.com/group/rest-discuss
-* http://code.google.com/p/implementing-rest/
+* http://code.google.com/p/implementing-rest
 * HTTP/1.1 Method Definitions - http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 * HTTP/1.1 Status Code Definitions - http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
 * HTTP/1.1 Header Field Definitions - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
 * http://www.subbu.org/
 * [Web Services architecture](http://www.w3.org/TR/ws-arch/)
+* Sinatra Ruby framework: http://www.sinatrarb.com
 
-* http://www.sinatrarb.com
+<!-- slide title -->
+# Questions
