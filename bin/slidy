@@ -30,7 +30,7 @@ header = <<-HEADER
     <title>Architectures for Distributed Applications</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="copyright" content="Copyright &#169; 2010 INRIA - Rennes Bretagne Atlantique" />
-    <meta name="font-size-adjustment" content="0" />
+    <meta name="font-size-adjustment" content="+1" />
     <link rel="stylesheet" href="assets/stylesheets/slidy.css" type="text/css" media="screen, projection, print" />
     <link rel="stylesheet" href="assets/stylesheets/custom.css" type="text/css" media="screen, projection, print" />
     <link rel="stylesheet" href="assets/stylesheets/shCore.css" type="text/css" media="screen, projection, print" />

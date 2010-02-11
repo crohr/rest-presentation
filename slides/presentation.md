@@ -6,7 +6,7 @@ Styles, Technologies and Applications
 {:class="subhead"}
 
 Cyril Rohr (IRISA - Equipe Myriads)  
-Feb 4, 2010
+Feb 11, 2010
 
 <!-- slide title -->
 # Agenda
@@ -43,17 +43,17 @@ Integration across organizational boundaries
 * duplication, high maintenance cost, no data sharing  
 {:class="incremental"}
 
-<!-- slide center title -->
+<!-- slide center -->
 # 2. Evolution towards Distributed Applications
 * **Applications sharing data**  
   <img src="images/applications-sharing-data.png" style="margin: 5px" />    
 * fragile, duplication   
 {:class="incremental"}
 
-<!-- slide center title -->
+<!-- slide center -->
 # 2. Evolution towards Distributed Applications
 * **Applications sharing objects over the network**   
-  <div class="incremental" style="clear: both">
+  <div class="incremental center" style="clear: both; margin: auto;">
     <img src="images/applications-bus.png" style="float:left" />
     <img src="images/applications-bus-enlarged.png" style="float:left" />
   </div>    
@@ -61,7 +61,7 @@ Integration across organizational boundaries
 * complex, vendor lock in, tight coupling 
 {:class="incremental"}
 
-<!-- slide center title -->
+<!-- slide center -->
 # 2. Evolution towards Distributed Applications
 * **Service Oriented Architectures**    
   <img src="images/soa.png" />   
@@ -187,7 +187,7 @@ Java method:
 <!-- slide incremental -->
 # 5B. Message Oriented Architecture - drawbacks
 Complex, ever-changing specification    
-<img src="images/ws-graph.png" width="500" height="335" style="margin: 5px" />    
+<img src="images/ws-graph.png" style="margin: 5px" />    
 WS-Security, WS-Policy, WS-SecurityPolicy, WS-PolicyAssertions, WS-PolicyAttachment, WS-Trust, WS-Privacy, WS-Routing, WS-Referral, WS-Coordination, WS-Transaction, WS-SecureConversation, WS-Federation, WS-Authorization, WS-Attachments, WS-Transfer, WS-ResourceTransfer, WS-ReliableMessaging, WS-Addressing, ...
 
 <!-- slide incremental -->
@@ -195,7 +195,7 @@ WS-Security, WS-Policy, WS-SecurityPolicy, WS-PolicyAssertions, WS-PolicyAttachm
 * Specification written and pushed by big vendors (IBM, Microsoft, HP, Intel, SAP, Sun, etc.)
 * Poor interoperability between vendor implementations, leading to vendor lock-in
 * Most often, developers use early binding => stubs, proxy objects => tight-coupling
-  <img src="images/soap.png" style="float: right;" height="70%" width="70%" />
+  <img src="images/soap.png" style="float: right;" />
 * Poor scalability: requires processing power to decode SOAP messages, difficult to load-balance or route requests based on the service endpoint (URI)
 * UDDI is a failure
 * Does not use HTTP as an application protocol, only as a transport protocol.
@@ -344,7 +344,7 @@ All resources share the same interface for transfering state between the client 
   {:class="incremental"}
 {:class="incremental"}
 
-<!-- slide title -->
+<!-- slide -->
 # 5C. **RESTful** Services - Client Side Code
 
 * Ruby
@@ -422,7 +422,7 @@ All resources share the same interface for transfering state between the client 
         }
     {:class="brush: js; collapse: false; highlight: [1,3,4,5,6,7,8,9,10,11,17,42]"}
 
-<!-- slide title -->
+<!-- slide -->
 # 5C. **RESTful** Services - Server Side Code
 
     require 'rubygems'
@@ -444,33 +444,50 @@ All resources share the same interface for transfering state between the client 
     API.run! :host => "localhost", :port => 4567
   {:class="brush: ruby"}
 
-See http://github.com/crohr/rest-presentation/app for a complete application.
-
 
 <!-- slide incremental -->
 # 5C. **RESTful** Services - HAL
+Library of scientific publications.
+
 ## Specification
 * authors
 
-        GET     /authors?affiliations=x,y,z  fetch the list of authors,              json         200,304,406,500
-                                             optionally filtered by affiliations     
-        POST    /authors                     create a new author                     json         201,400,406,415,500
-        DELETE  /authors/:author_id          delete the author                                    204,500
-        PUT     /authors/:author_id          update an author                        json         200,400,406,415,500
+        METHOD  URI,MEDIA-TYPES,CODES        DESCRIPTION               
+        GET     /authors?affiliations=x,y,z  fetch the list of authors,              
+                json                            optionally filtered by affiliations     
+                200,304,406,500                                       
+        POST    /authors                     create a new author                              
+                json
+                201,400,406,415,500  
+        DELETE  /authors/:author_id          delete the author                                    
+                204,500
+        PUT     /authors/:author_id          update an author                        
+                json         
+                200,400,406,415,500
 * papers                                     
                                              
-        GET     /papers?tags=x,y,z           fetch the list of papers,               json         200,304,406,500
-                                             optionally filtered by tags
-        POST    /papers                      create a new paper                      json         201,400,406,415,500
-        DELETE  /papers/:paper_id            delete the paper                                     204,500
-        PUT     /papers/:paper_id            update a paper. deal with conflicts.    json,text,   200,400,406,415,500
-                                                                                     html,pdf,
-                                                                                     latex
+        GET     /papers?tags=x,y,z           fetch the list of papers,               
+                json                            optionally filtered by tags
+                200,304,406,500
+        POST    /papers                      create a new paper                      
+                json         
+                201,400,406,415,500
+        DELETE  /papers/:paper_id            delete the paper                                     
+                204,500
+        PUT     /papers/:paper_id            update a paper. deal with conflicts.    
+                json,text,html,pdf,latex   
+                200,400,406,415,500
+                                                                                     
+                                                                                     
 * convenience collections                    
                                              
-        GET     /authors/:author_id/papers   fetch the papers of a specific author   json
-        GET     /papers/:paper_id/authors    fetch the authors of a specific paper   json
+        GET     /authors/:author_id/papers   fetch the papers of a specific author   
+                json
+        GET     /papers/:paper_id/authors    fetch the authors of a specific paper   
+                json
 
+## Implementation
+See [http://github.com/crohr/rest-presentation/tree/master/app](http://github.com/crohr/rest-presentation/tree/master/app/) for the implementation.
 
 <!-- slide incremental -->
 # 6. **RESTful** Services - Real-World examples - Grid5000

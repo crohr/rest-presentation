@@ -77,7 +77,7 @@ div.slide + div[class].slide { page-break-before: always;}
 
 div.slide h1 {
   display: block; 
-  font-size: 160%;
+  font-size: 140%;
   line-height: 1.2em;
   background: transparent;
   min-height: 2.0em;
@@ -199,7 +199,7 @@ p,pre,ul,ol,blockquote,h2,h3,h4,h5,h6,dl,table {
   margin-right: 1em;
 }
 
-p.subhead { font-weight: bold; margin-top: 2em; font-size: 2em; line-height: 2em; }
+p.subhead { font-weight: bold; margin-top: 2em; margin-bottom: 1em; font-size: 1.5em; line-height: 2em; }
 
 .smaller { font-size: smaller }
 .bigger { font-size: 130% }

@@ -6,7 +6,7 @@
     <title>Architectures for Distributed Applications</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="copyright" content="Copyright &#169; 2010 INRIA - Rennes Bretagne Atlantique" />
-    <meta name="font-size-adjustment" content="0" />
+    <meta name="font-size-adjustment" content="+1" />
     <link rel="stylesheet" href="assets/stylesheets/slidy.css" type="text/css" media="screen, projection, print" />
     <link rel="stylesheet" href="assets/stylesheets/custom.css" type="text/css" media="screen, projection, print" />
     <link rel="stylesheet" href="assets/stylesheets/shCore.css" type="text/css" media="screen, projection, print" />
@@ -33,7 +33,7 @@
 
 <p class='subhead'>Styles, Technologies and Applications</p>
 
-<p>Cyril Rohr (IRISA - Equipe Myriads)<br />Feb 4, 2010</p></div>
+<p>Cyril Rohr (IRISA - Equipe Myriads)<br />Feb 11, 2010</p></div>
 <div class="slide title"><h1 id='agenda'>Agenda</h1>
 
 <ol class='incremental'>
@@ -68,24 +68,24 @@
 
 <li>duplication, high maintenance cost, no data sharing</li>
 </ul></div>
-<div class="slide center title"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
+<div class="slide center"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
 
 <ul class='incremental'>
 <li><strong>Applications sharing data</strong><br /><img src='images/applications-sharing-data.png' style='margin: 5px' /></li>
 
 <li>fragile, duplication</li>
 </ul></div>
-<div class="slide center title"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
+<div class="slide center"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
 
 <ul class='incremental'>
-<li><strong>Applications sharing objects over the network</strong> <br /><div class='incremental' style='clear: both'>
+<li><strong>Applications sharing objects over the network</strong> <br /><div class='incremental center' style='clear: both; margin: auto;'>
   <img src='images/applications-bus.png' style='float:left' />
   <img src='images/applications-bus-enlarged.png' style='float:left' />
 </div> <br /><div style='clear: both' /></li>
 
 <li>complex, vendor lock in, tight coupling</li>
 </ul></div>
-<div class="slide center title"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
+<div class="slide center"><h1 id='2_evolution_towards_distributed_applications'>2. Evolution towards Distributed Applications</h1>
 
 <ul class='incremental'>
 <li><strong>Service Oriented Architectures</strong> <br /><img src='images/soa.png' /></li>
@@ -227,7 +227,7 @@
 </ul></div>
 <div class="slide incremental"><h1 id='5b_message_oriented_architecture__drawbacks'>5B. Message Oriented Architecture - drawbacks</h1>
 
-<p>Complex, ever-changing specification <br /><img src='images/ws-graph.png' height='335' width='500' style='margin: 5px' /> <br />WS-Security, WS-Policy, WS-SecurityPolicy, WS-PolicyAssertions, WS-PolicyAttachment, WS-Trust, WS-Privacy, WS-Routing, WS-Referral, WS-Coordination, WS-Transaction, WS-SecureConversation, WS-Federation, WS-Authorization, WS-Attachments, WS-Transfer, WS-ResourceTransfer, WS-ReliableMessaging, WS-Addressing, &#8230;</p></div>
+<p>Complex, ever-changing specification <br /><img src='images/ws-graph.png' style='margin: 5px' /> <br />WS-Security, WS-Policy, WS-SecurityPolicy, WS-PolicyAssertions, WS-PolicyAttachment, WS-Trust, WS-Privacy, WS-Routing, WS-Referral, WS-Coordination, WS-Transaction, WS-SecureConversation, WS-Federation, WS-Authorization, WS-Attachments, WS-Transfer, WS-ResourceTransfer, WS-ReliableMessaging, WS-Addressing, &#8230;</p></div>
 <div class="slide incremental"><h1 id='5b_message_oriented_architecture__drawbacks'>5B. Message Oriented Architecture - drawbacks</h1>
 
 <ul class='incremental'>
@@ -235,7 +235,7 @@
 
 <li>Poor interoperability between vendor implementations, leading to vendor lock-in</li>
 
-<li>Most often, developers use early binding =&gt; stubs, proxy objects =&gt; tight-coupling <img src='images/soap.png' height='70%' style='float: right;' width='70%' /></li>
+<li>Most often, developers use early binding =&gt; stubs, proxy objects =&gt; tight-coupling <img src='images/soap.png' style='float: right;' /></li>
 
 <li>Poor scalability: requires processing power to decode SOAP messages, difficult to load-balance or route requests based on the service endpoint (URI)</li>
 
@@ -456,7 +456,7 @@
 </ul>
 </li>
 </ul></div>
-<div class="slide title"><h1 id='5c_restful_services__client_side_code'>5C. <strong>RESTful</strong> Services - Client Side Code</h1>
+<div class="slide"><h1 id='5c_restful_services__client_side_code'>5C. <strong>RESTful</strong> Services - Client Side Code</h1>
 
 <ul>
 <li>
@@ -540,7 +540,7 @@
   }</pre>
 </li>
 </ul></div>
-<div class="slide title"><h1 id='5c_restful_services__server_side_code'>5C. <strong>RESTful</strong> Services - Server Side Code</h1>
+<div class="slide"><h1 id='5c_restful_services__server_side_code'>5C. <strong>RESTful</strong> Services - Server Side Code</h1>
 
 <pre class='brush: ruby'>require &#39;rubygems&#39;
 require &#39;sinatra/base&#39;  # gem install sinatra
@@ -558,10 +558,10 @@ class API &lt; Sinatra::Base
   delete      &#39;/URI&#39;   { do_something }
   
 end
-API.run! :host =&gt; &quot;localhost&quot;, :port =&gt; 4567</pre>
-
-<p>See http://github.com/crohr/rest-presentation/app for a complete application.</p></div>
+API.run! :host =&gt; &quot;localhost&quot;, :port =&gt; 4567</pre></div>
 <div class="slide incremental"><h1 id='5c_restful_services__hal'>5C. <strong>RESTful</strong> Services - HAL</h1>
+
+<p>Library of scientific publications.</p>
 
 <h2 id='specification'>Specification</h2>
 
@@ -569,32 +569,49 @@ API.run! :host =&gt; &quot;localhost&quot;, :port =&gt; 4567</pre>
 <li>
 <p>authors</p>
 
-<pre>  GET     /authors?affiliations=x,y,z  fetch the list of authors,              json         200,304,406,500
-                                       optionally filtered by affiliations     
-  POST    /authors                     create a new author                     json         201,400,406,415,500
-  DELETE  /authors/:author_id          delete the author                                    204,500
-  PUT     /authors/:author_id          update an author                        json         200,400,406,415,500</pre>
+<pre>  METHOD  URI,MEDIA-TYPES,CODES        DESCRIPTION               
+  GET     /authors?affiliations=x,y,z  fetch the list of authors,              
+          json                            optionally filtered by affiliations     
+          200,304,406,500                                       
+  POST    /authors                     create a new author                              
+          json
+          201,400,406,415,500  
+  DELETE  /authors/:author_id          delete the author                                    
+          204,500
+  PUT     /authors/:author_id          update an author                        
+          json         
+          200,400,406,415,500</pre>
 </li>
 
 <li>
 <p>papers</p>
 
-<pre>  GET     /papers?tags=x,y,z           fetch the list of papers,               json         200,304,406,500
-                                       optionally filtered by tags
-  POST    /papers                      create a new paper                      json         201,400,406,415,500
-  DELETE  /papers/:paper_id            delete the paper                                     204,500
-  PUT     /papers/:paper_id            update a paper. deal with conflicts.    json,text,   200,400,406,415,500
-                                                                               html,pdf,
-                                                                               latex</pre>
+<pre>  GET     /papers?tags=x,y,z           fetch the list of papers,               
+          json                            optionally filtered by tags
+          200,304,406,500
+  POST    /papers                      create a new paper                      
+          json         
+          201,400,406,415,500
+  DELETE  /papers/:paper_id            delete the paper                                     
+          204,500
+  PUT     /papers/:paper_id            update a paper. deal with conflicts.    
+          json,text,html,pdf,latex   
+          200,400,406,415,500</pre>
 </li>
 
 <li>
 <p>convenience collections</p>
 
-<pre>  GET     /authors/:author_id/papers   fetch the papers of a specific author   json
-  GET     /papers/:paper_id/authors    fetch the authors of a specific paper   json</pre>
+<pre>  GET     /authors/:author_id/papers   fetch the papers of a specific author   
+          json
+  GET     /papers/:paper_id/authors    fetch the authors of a specific paper   
+          json</pre>
 </li>
-</ul></div>
+</ul>
+
+<h2 id='implementation'>Implementation</h2>
+
+<p>See <a href='http://github.com/crohr/rest-presentation/tree/master/app/'>http://github.com/crohr/rest-presentation/tree/master/app</a> for the implementation.</p></div>
 <div class="slide incremental"><h1 id='6_restful_services__realworld_examples__grid5000'>6. <strong>RESTful</strong> Services - Real-World examples - Grid5000</h1>
 <img src='images/grid5000.png' height='80%' style='float:left' width='70%' /></div>
 <div class="slide incremental"><h1 id='6_restful_services__realworld_examples__in_the_wild'>6. <strong>RESTful</strong> Services - Real-World examples - In the wild</h1>
