@@ -201,22 +201,19 @@
 
 <h2 id='soap'>SOAP</h2>
 
-<pre class='brush: xml;'>POST /service
+<pre class='brush: xml; highlight: [1,6,9];'>POST /service
 
 &lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2001/12/soap-envelope&quot; soap:encodingStyle=&quot;http://www.w3.org/2001/12/soap-encoding&quot;&gt;
-
   &lt;soap:Header&gt;
   ...
   &lt;/soap:Header&gt;
-
   &lt;soap:Body&gt;
     &lt;myMethod&gt;
         &lt;x xsi:type=&quot;xsd:int&quot;&gt;5&lt;/x&gt;
         &lt;y xsi:type=&quot;xsd:float&quot;&gt;5.0&lt;/y&gt;
     &lt;/myMethod&gt;
   &lt;/soap:Body&gt;
-
 &lt;/soap:Envelope&gt;</pre></div>
 <div class="slide incremental"><h1 id='5b_message_oriented_architecture__benefits'>5B. Message Oriented Architecture - benefits</h1>
 
@@ -559,20 +556,28 @@ class API &lt; Sinatra::Base
   
 end
 API.run! :host =&gt; &quot;localhost&quot;, :port =&gt; 4567</pre></div>
-<div class="slide incremental"><h1 id='5c_restful_services__hal'>5C. <strong>RESTful</strong> Services - HAL</h1>
-
-<p>Library of scientific publications.</p>
+<div class="slide incremental"><h1 id='5c_restful_services__example_library_of_scientific_publications'>5C. <strong>RESTful</strong> Services - Example: library of scientific publications</h1>
 
 <h2 id='specification'>Specification</h2>
 
 <ul>
 <li>
+<p>root</p>
+
+<pre>  METHOD  URI,MEDIA-TYPES,CODES        DESCRIPTION
+  GET     /                            API entry-point
+          json</pre>
+</li>
+
+<li>
 <p>authors</p>
 
-<pre>  METHOD  URI,MEDIA-TYPES,CODES        DESCRIPTION               
-  GET     /authors?affiliations=x,y,z  fetch the list of authors,              
+<pre>  GET     /authors?affiliations=x,y,z  fetch the list of authors,              
           json                            optionally filtered by affiliations     
-          200,304,406,500                                       
+          200,304,406,500                  
+  GET     /authors/:author_id          fetch a specific author
+          json
+          200,304,404,406,500
   POST    /authors                     create a new author                              
           json
           201,400,406,415,500  
@@ -589,14 +594,17 @@ API.run! :host =&gt; &quot;localhost&quot;, :port =&gt; 4567</pre></div>
 <pre>  GET     /papers?tags=x,y,z           fetch the list of papers,               
           json                            optionally filtered by tags
           200,304,406,500
+  GET     /papers/:paper_id            fetch a specific author
+          json,text,html,pdf,latex 
+          200,304,404,406,500
   POST    /papers                      create a new paper                      
           json         
           201,400,406,415,500
   DELETE  /papers/:paper_id            delete the paper                                     
           204,500
   PUT     /papers/:paper_id            update a paper. deal with conflicts.    
-          json,text,html,pdf,latex   
-          200,400,406,415,500</pre>
+          json
+          200,400,406,409,415,500</pre>
 </li>
 
 <li>
@@ -609,11 +617,10 @@ API.run! :host =&gt; &quot;localhost&quot;, :port =&gt; 4567</pre></div>
 </li>
 </ul>
 
-<h2 id='implementation'>Implementation</h2>
-
 <p>See <a href='http://github.com/crohr/rest-presentation/tree/master/app/'>http://github.com/crohr/rest-presentation/tree/master/app</a> for the implementation.</p></div>
 <div class="slide incremental"><h1 id='6_restful_services__realworld_examples__grid5000'>6. <strong>RESTful</strong> Services - Real-World examples - Grid5000</h1>
-<img src='images/grid5000.png' height='80%' style='float:left' width='70%' /></div>
+<img src='images/grid5000.png' height='80%' style='float:left' width='70%' />
+<p><a href='http://www.grid5000.fr'>http://www.grid5000.fr</a></p></div>
 <div class="slide incremental"><h1 id='6_restful_services__realworld_examples__in_the_wild'>6. <strong>RESTful</strong> Services - Real-World examples - In the wild</h1>
 
 <h2 id='restful'>RESTful</h2>
@@ -656,5 +663,11 @@ API.run! :host =&gt; &quot;localhost&quot;, :port =&gt; 4567</pre></div>
 
 <li>Sinatra Ruby framework: http://www.sinatrarb.com</li>
 </ul></div>
-<div class="slide title"><h1 id='questions'>Questions</h1></div>  </body>
+<div class="slide title"><h1 id='questions'>Questions</h1>
+
+<ul>
+<li><a href='mailto:cyril.rohr@irisa.fr'>cyril.rohr@irisa.fr</a></li>
+
+<li><a href='http://crohr.me'>http://crohr.me</a></li>
+</ul></div>  </body>
 </html>

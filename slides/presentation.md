@@ -163,20 +163,17 @@ Java method:
     
     <?xml version="1.0"?>
     <soap:Envelope xmlns:soap="http://www.w3.org/2001/12/soap-envelope" soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
-    
       <soap:Header>
       ...
       </soap:Header>
-    
       <soap:Body>
         <myMethod>
             <x xsi:type="xsd:int">5</x>
             <y xsi:type="xsd:float">5.0</y>
         </myMethod>
       </soap:Body>
-    
     </soap:Envelope>
-  {:class="brush: xml;"}
+  {:class="brush: xml; highlight: [1,6,9];"}
 
 <!-- slide incremental -->
 # 5B. Message Oriented Architecture - benefits
@@ -446,16 +443,22 @@ All resources share the same interface for transfering state between the client 
 
 
 <!-- slide incremental -->
-# 5C. **RESTful** Services - HAL
-Library of scientific publications.
+# 5C. **RESTful** Services - Example: library of scientific publications
 
 ## Specification
-* authors
+* root
 
-        METHOD  URI,MEDIA-TYPES,CODES        DESCRIPTION               
+        METHOD  URI,MEDIA-TYPES,CODES        DESCRIPTION
+        GET     /                            API entry-point
+                json
+* authors
+              
         GET     /authors?affiliations=x,y,z  fetch the list of authors,              
                 json                            optionally filtered by affiliations     
-                200,304,406,500                                       
+                200,304,406,500                  
+        GET     /authors/:author_id          fetch a specific author
+                json
+                200,304,404,406,500
         POST    /authors                     create a new author                              
                 json
                 201,400,406,415,500  
@@ -469,16 +472,18 @@ Library of scientific publications.
         GET     /papers?tags=x,y,z           fetch the list of papers,               
                 json                            optionally filtered by tags
                 200,304,406,500
+        GET     /papers/:paper_id            fetch a specific author
+                json,text,html,pdf,latex 
+                200,304,404,406,500
         POST    /papers                      create a new paper                      
                 json         
                 201,400,406,415,500
         DELETE  /papers/:paper_id            delete the paper                                     
                 204,500
         PUT     /papers/:paper_id            update a paper. deal with conflicts.    
-                json,text,html,pdf,latex   
-                200,400,406,415,500
-                                                                                     
-                                                                                     
+                json
+                200,400,406,409,415,500
+                                                                                                                                                             
 * convenience collections                    
                                              
         GET     /authors/:author_id/papers   fetch the papers of a specific author   
@@ -486,12 +491,12 @@ Library of scientific publications.
         GET     /papers/:paper_id/authors    fetch the authors of a specific paper   
                 json
 
-## Implementation
 See [http://github.com/crohr/rest-presentation/tree/master/app](http://github.com/crohr/rest-presentation/tree/master/app/) for the implementation.
 
 <!-- slide incremental -->
 # 6. **RESTful** Services - Real-World examples - Grid5000
 <img src="images/grid5000.png" style="float:left" width="70%" height="80%" />
+[http://www.grid5000.fr](http://www.grid5000.fr)
 
 <!-- slide incremental -->
 # 6. **RESTful** Services - Real-World examples - In the wild
@@ -519,3 +524,5 @@ See [http://github.com/crohr/rest-presentation/tree/master/app](http://github.co
 
 <!-- slide title -->
 # Questions
+* [cyril.rohr@irisa.fr](mailto:cyril.rohr@irisa.fr)
+* [http://crohr.me](http://crohr.me)
