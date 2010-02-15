@@ -70,6 +70,7 @@ div.slide {
   right: 0;
   line-height: 120%;
   background-color: transparent;
+  clear: both;
 }
 
 /* this rule is hidden from IE 6 and below which don't support + selector */

@@ -53,7 +53,7 @@ Integration across organizational boundaries
 <!-- slide center -->
 # 2. Evolution towards Distributed Applications
 * **Applications sharing objects over the network**   
-  <div class="incremental center" style="clear: both; margin: auto;">
+  <div class="incremental center" style="clear: both; margin: auto; width: 1000px">
     <img src="images/applications-bus.png" style="float:left" />
     <img src="images/applications-bus-enlarged.png" style="float:left" />
   </div>    
@@ -261,7 +261,7 @@ All resources share the same interface for transfering state between the client 
 * Stateless (each operation is self-sufficient)
 * Cacheable
 * Layered (intermediaries can be inserted between client and server, such as proxy, firewall, load-balancer, etc.)
-  <div class="incremental">
+  <div class="incremental" style="width: 1000px">
     <img src="images/infrastructure-2.png" width="25%" height="25%" style="float:left" />
     <img src="images/infrastructure-3.png" width="25%" height="25%" style="float:left" />
     <img src="images/infrastructure-4.png" width="25%" height="25%" style="float:left" />
@@ -284,8 +284,7 @@ All resources share the same interface for transfering state between the client 
         Accept-Encoding: gzip, deflate [compression]
         Accept-Language: us,en;q=0.5 [language]
         Accept-Charset: ISO-8859-15,utf-8;q=0.7,*;q=0.7 [charset]
-        ...
-        You can define your own: X-Api-Version, X-Api-User...
+        ...You can define your own: X-Api-Version, X-Api-User...
 
 * Removes unnecessary complexity: headers, methods, status codes, media types are already standardized. The protocol is well documented, and in use since the Web exists. It's not another protocol on top of another protocol on top of another protocol on top of...
 {:class="incremental"}
@@ -495,7 +494,7 @@ See [http://github.com/crohr/rest-presentation/tree/master/app](http://github.co
 
 <!-- slide incremental -->
 # 6. **RESTful** Services - Real-World examples - Grid5000
-<img src="images/grid5000.png" style="float:left" width="70%" height="80%" />
+<img src="images/grid5000.png" style="float:left; width: 1000px" width="70%" height="80%" />
 [http://www.grid5000.fr](http://www.grid5000.fr)
 
 <!-- slide incremental -->
